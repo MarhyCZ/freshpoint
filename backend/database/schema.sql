@@ -1,4 +1,9 @@
-CREATE TABLE device (
-                        token TEXT PRIMARY KEY,
-                        registeredAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+BEGIN;
+
+CREATE TABLE device
+(
+    token        TEXT PRIMARY KEY,
+    registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+COMMIT;

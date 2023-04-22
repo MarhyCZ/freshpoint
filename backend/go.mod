@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.1
+	github.com/mattn/go-sqlite3 v1.14.16
 	github.com/sideshow/apns2 v0.23.0
 )
 

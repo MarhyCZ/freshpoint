@@ -10,20 +10,6 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-type FoodItem struct {
-	Category string `json:"category"`
-	Name     string `json:"name"`
-	ImageURL string `json:"imageURL"`
-	Info     string `json:"info"`
-	Price    int    `json:"price"`
-	Quantity int    `json:"quantity"`
-}
-
-type FreshPointCatalog struct {
-	Categories []string   `json:"categories"`
-	Products   []FoodItem `json:"products"`
-}
-
 func FetchProducts() FreshPointCatalog {
 	res, err := http.Get("https://my.freshpoint.cz/device/product-list/298")
 	if err != nil {

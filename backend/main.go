@@ -1,6 +1,7 @@
 package main
 
 import (
+	"freshpoint/backend/database"
 	"freshpoint/backend/freshpoint"
 	"time"
 )
@@ -16,5 +17,6 @@ func main() {
 		return freshpoint.FetchProducts()
 	})
 
+	database.Init()
 	serve()
 }
