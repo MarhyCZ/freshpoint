@@ -10,7 +10,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-type FoodProduct struct {
+type FoodItem struct {
 	Category string `json:"category"`
 	Name     string `json:"name"`
 	Image    string `json:"image"`
@@ -20,8 +20,8 @@ type FoodProduct struct {
 }
 
 type FreshPointCatalog struct {
-	Categories []string      `json:"categories"`
-	Products   []FoodProduct `json:"products"`
+	Categories []string   `json:"categories"`
+	Products   []FoodItem `json:"products"`
 }
 
 func FetchProducts() FreshPointCatalog {
@@ -41,7 +41,7 @@ func FetchProducts() FreshPointCatalog {
 	}
 
 	categories := make([]string, 0)
-	products := make([]FoodProduct, 0)
+	products := make([]FoodItem, 0)
 
 	doc.Find("a.nav-link").Each(func(i int, link *goquery.Selection) {
 		category := link.Text()
@@ -65,7 +65,7 @@ func FetchProducts() FreshPointCatalog {
 	}
 }
 
-func parseFoodProduct(category string, product *goquery.Selection) FoodProduct {
+func parseFoodProduct(category string, product *goquery.Selection) FoodItem {
 	// Get the name
 	name := product.Find(".col-12.mb-2 > .font-weight-bold").Text()
 
@@ -99,7 +99,7 @@ func parseFoodProduct(category string, product *goquery.Selection) FoodProduct {
 			quantity = -1
 		}
 	}
-	return FoodProduct{category, name, image, info, price, quantity}
+	return FoodItem{category, name, image, info, price, quantity}
 }
 
 // Because Freshpoint uses czech labels for div IDs...
