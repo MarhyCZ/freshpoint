@@ -3,12 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"freshpoint/backend/freshpoint"
 	"net/http"
 )
 
 func serve() {
 	mux := http.NewServeMux()
-	mux.Handle("/", AllowedMethodsMiddleware(http.HandlerFunc(index)))
+	mux.Handle("/food", AllowedMethodsMiddleware(http.HandlerFunc(index)))
 
 	srv := &http.Server{
 		Addr:    ":8080",
@@ -25,7 +26,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 	// }
 	// Retrieve the data from cache
 	products, ok := c.Get("freshpoint")
-	json.NewEncoder(w).Encode(products)
+	json.NewEncoder(w).Encode(products.(freshpoint.FreshPointCatalog))
 	if !ok {
 		fmt.Println("Could not get data from cache")
 	}

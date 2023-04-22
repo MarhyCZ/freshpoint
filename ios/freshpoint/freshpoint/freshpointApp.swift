@@ -11,7 +11,7 @@ import SwiftUI
 struct freshpointApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FoodListView()
         }
     }
 }

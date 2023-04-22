@@ -24,6 +24,7 @@ extension FoodItem: Identifiable {
 }
 extension FoodItem: Equatable {}
 extension FoodItem: Hashable {}
+extension FoodItem: Decodable {}
 
 // MARK: - Mock
 #if DEBUG

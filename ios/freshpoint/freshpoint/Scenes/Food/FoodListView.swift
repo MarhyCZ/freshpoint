@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct FoodListView: View {
-    @State var foodItems: [FoodItem] = FoodItem.mockedFoodProducts
-    
+    @ObservedObject var foodFetcher = FoodItemFetcher()
     var body: some View {
-        List(foodItems) { item in
+        List(foodFetcher.freshpointCatalog.products) { item in
             HStack {
                 AsyncImage(url: item.imageURL) { image in
                     image.resizable().aspectRatio(contentMode: .fit)
@@ -28,6 +27,8 @@ struct FoodListView: View {
                         .foregroundColor(.gray)
                 }
             }
+        }.task {
+            await foodFetcher.fetch()
         }
     }
 }

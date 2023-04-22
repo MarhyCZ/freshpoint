@@ -13,7 +13,7 @@ import (
 type FoodItem struct {
 	Category string `json:"category"`
 	Name     string `json:"name"`
-	Image    string `json:"image"`
+	ImageURL string `json:"imageURL"`
 	Info     string `json:"info"`
 	Price    int    `json:"price"`
 	Quantity int    `json:"quantity"`
@@ -70,7 +70,7 @@ func parseFoodProduct(category string, product *goquery.Selection) FoodItem {
 	name := product.Find(".col-12.mb-2 > .font-weight-bold").Text()
 
 	// Get the image
-	image, _ := product.Find(".w-auto.img-fluid").Attr("src")
+	imageURL, _ := product.Find(".w-auto.img-fluid").Attr("src")
 
 	// Get the info
 	info := product.Find(".product-info").Text()
@@ -99,7 +99,7 @@ func parseFoodProduct(category string, product *goquery.Selection) FoodItem {
 			quantity = -1
 		}
 	}
-	return FoodItem{category, name, image, info, price, quantity}
+	return FoodItem{category, name, imageURL, info, price, quantity}
 }
 
 // Because Freshpoint uses czech labels for div IDs...

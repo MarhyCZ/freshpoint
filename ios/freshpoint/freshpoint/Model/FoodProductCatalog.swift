@@ -11,3 +11,5 @@ struct FreshPointCatalog {
     let categories: [String]
     let products: [FoodItem]
 }
+
+extension FreshPointCatalog: Decodable {}

@@ -8,14 +8,14 @@
 import Foundation
 
 class FoodItemFetcher: ObservableObject {
-    @Published var foodItems = [FoodItem]()
+    @Published var freshpointCatalog = FreshPointCatalog(categories: [String](), products: [FoodItem]())
     
-    init() async {
-        guard let url = URL(string: "https://example.com/fooditems.json") else { return }
+    func fetch() async {
+        guard let url = URL(string: "http://localhost:8080/food") else { return }
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
-            self.foodItems = try JSONDecoder().decode([FoodItem].self, from: data)
+            self.freshpointCatalog = try JSONDecoder().decode(FreshPointCatalog.self, from: data)
         } catch {
             print("Error decoding JSON: \(error)")
         }
