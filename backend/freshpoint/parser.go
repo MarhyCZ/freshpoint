@@ -77,6 +77,9 @@ func parseFoodProduct(category string, product *goquery.Selection) FoodProduct {
 
 	// Get the price
 	priceString := product.Find(".price").Text()
+	if len(priceString) == 0 {
+		priceString = product.Find(".text-danger.font-weight-bold").Text()
+	}
 	price, err := strconv.Atoi(strings.Split(priceString, ".")[0])
 	if err != nil {
 		log.Println("Error parsing price for: " + name)
@@ -88,8 +91,13 @@ func parseFoodProduct(category string, product *goquery.Selection) FoodProduct {
 	quantity, err := strconv.Atoi(quantityString[0])
 
 	if err != nil {
-		log.Println("Error parsing quantity for: " + name)
-		quantity = 1
+		switch quantityString[0] {
+		case "Poslední":
+			quantity = 1
+		default:
+			log.Println("Error parsing quantity for: " + name)
+			quantity = -1
+		}
 	}
 	return FoodProduct{category, name, image, info, price, quantity}
 }

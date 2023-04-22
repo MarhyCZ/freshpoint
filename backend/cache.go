@@ -40,7 +40,7 @@ func (c *cache) Delete(name string) {
 }
 
 func (c *cache) SetAutoUpdate(name string, ttl time.Duration, updateFunc func() interface{}) {
-	newData := updateFunc() // Call updateFunc() initially
+	newData := updateFunc()
 	c.Set(name, newData, ttl, updateFunc)
 
 	ticker := time.NewTicker(ttl)

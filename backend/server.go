@@ -33,7 +33,6 @@ func index(w http.ResponseWriter, r *http.Request) {
 
 func AllowedMethodsMiddleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		println("AllowedMethodsMiddleware")
 		switch r.Method {
 		case http.MethodGet:
 			next.ServeHTTP(w, r)
