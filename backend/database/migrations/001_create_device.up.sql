@@ -1,9 +1,5 @@
-BEGIN;
-
 CREATE TABLE device
 (
     token        TEXT PRIMARY KEY,
     registered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-COMMIT;
