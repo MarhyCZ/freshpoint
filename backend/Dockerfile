@@ -14,7 +14,7 @@ RUN go mod download
 COPY . ./
 
 # Build
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /freshpoint
+RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o /freshpoint
 
 # Optional:
 # To bind to a TCP port, runtime parameters must be supplied to the docker command.
