@@ -11,7 +11,7 @@ class FoodItemFetcher: ObservableObject {
     @Published var freshpointCatalog = FreshPointCatalog(categories: [String](), products: [FoodItem]())
     
     func fetch() async {
-        guard let url = URL(string: "http://localhost:8080/food") else { return }
+        guard let url = URL(string: "https://freshpoint.mb.marstad.cz/food") else { return }
         
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
