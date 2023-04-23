@@ -15,8 +15,8 @@ struct DeviceManager {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let json = ["deviceToken": deviceToken.hexString]
-        let jsonData = try! JSONSerialization.data(withJSONObject: json, options: [])
+        let device = Device(token: deviceToken.hexString)
+        let jsonData = try! JSONEncoder().encode(device)
         request.httpBody = jsonData
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
