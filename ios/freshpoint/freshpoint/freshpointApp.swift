@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct freshpointApp: App {
+    @UIApplicationDelegateAdaptor var delegate: AppDelegate
+    
     var body: some Scene {
         WindowGroup {
             VStack {
@@ -19,6 +21,7 @@ struct freshpointApp: App {
                             // Handle the error here.
                         }
                         if granted {
+                            print("Granted")
                             DispatchQueue.main.async {
                                 UIApplication.shared.registerForRemoteNotifications()
                             }
@@ -31,6 +34,9 @@ struct freshpointApp: App {
         }
     }
     
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("Sending token...")
         print(deviceToken.hexString)
@@ -39,6 +45,6 @@ struct freshpointApp: App {
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
 
-        print("I am not available in simulator :( \(error)")
+        print("\(error)")
     }
 }
