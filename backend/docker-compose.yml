@@ -1,0 +1,16 @@
+version: '3.8'
+name: 'freshpoint'
+services:
+    freshpoint:
+        container_name: freshpoint
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - STORAGE_PATH=/app/storage
+        volumes:
+            - '/home/user/docker/storage/freshpoint:/app/storage'
+        image: 'marhycz/freshpoint:latest'
+        restart: unless-stopped
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.freshpoint.rule=Host(`freshpoint.mb.marstad.cz`)"

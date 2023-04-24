@@ -23,7 +23,7 @@ type Database struct {
 }
 
 func NewConnection() *Database {
-	dbFile := "./database.db"
+	dbFile := os.Getenv("STORAGE_PATH") + "/database.db"
 	_, err := os.Stat(dbFile)
 	if os.IsNotExist(err) {
 		fmt.Println("Database file does not exist. Creating...")
