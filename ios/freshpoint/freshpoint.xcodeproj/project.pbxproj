@@ -15,6 +15,9 @@
 		90030E1129F3E2C200598D7F /* FoodProductCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E1029F3E2C200598D7F /* FoodProductCatalog.swift */; };
 		90030E1729F3E3E800598D7F /* FoodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E1629F3E3E800598D7F /* FoodListView.swift */; };
 		90030E1A29F3EB7800598D7F /* Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E1929F3EB7800598D7F /* Fetch.swift */; };
+		90030E1C29F5541F00598D7F /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E1B29F5541F00598D7F /* DeviceManager.swift */; };
+		90030E1E29F5548800598D7F /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E1D29F5548800598D7F /* Device.swift */; };
+		90030E2129F5579100598D7F /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E2029F5579100598D7F /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,10 @@
 		90030E1029F3E2C200598D7F /* FoodProductCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodProductCatalog.swift; sourceTree = "<group>"; };
 		90030E1629F3E3E800598D7F /* FoodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListView.swift; sourceTree = "<group>"; };
 		90030E1929F3EB7800598D7F /* Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch.swift; sourceTree = "<group>"; };
+		90030E1B29F5541F00598D7F /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
+		90030E1D29F5548800598D7F /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		90030E2029F5579100598D7F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		90030E2229F59D8000598D7F /* freshpoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = freshpoint.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +66,8 @@
 		90030DFE29F3E22700598D7F /* freshpoint */ = {
 			isa = PBXGroup;
 			children = (
+				90030E2229F59D8000598D7F /* freshpoint.entitlements */,
+				90030E1F29F5578700598D7F /* Extensions */,
 				90030E1829F3EB6A00598D7F /* Network */,
 				90030E1229F3E37200598D7F /* Scenes */,
 				90030E0D29F3E23B00598D7F /* Model */,
@@ -83,6 +92,7 @@
 			children = (
 				90030E0E29F3E26800598D7F /* FoodItem.swift */,
 				90030E1029F3E2C200598D7F /* FoodProductCatalog.swift */,
+				90030E1D29F5548800598D7F /* Device.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -107,8 +117,17 @@
 			isa = PBXGroup;
 			children = (
 				90030E1929F3EB7800598D7F /* Fetch.swift */,
+				90030E1B29F5541F00598D7F /* DeviceManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		90030E1F29F5578700598D7F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				90030E2029F5579100598D7F /* Data.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,7 +165,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 90030DF729F3E22700598D7F /* Build configuration list for PBXProject "freshpoint" */;
+			buildConfigurationList = 90030DF729F3E22700598D7F /* Build configuration list for PBXProject "FreshPoint" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -187,6 +206,9 @@
 				90030E0F29F3E26800598D7F /* FoodItem.swift in Sources */,
 				90030E0029F3E22700598D7F /* freshpointApp.swift in Sources */,
 				90030E1129F3E2C200598D7F /* FoodProductCatalog.swift in Sources */,
+				90030E1C29F5541F00598D7F /* DeviceManager.swift in Sources */,
+				90030E2129F5579100598D7F /* Data.swift in Sources */,
+				90030E1E29F5548800598D7F /* Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,12 +334,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = freshpoint/freshpoint.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"freshpoint/Preview Content\"";
 				DEVELOPMENT_TEAM = FBWNLT2RLU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -341,12 +365,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = freshpoint/freshpoint.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"freshpoint/Preview Content\"";
 				DEVELOPMENT_TEAM = FBWNLT2RLU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -368,7 +394,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		90030DF729F3E22700598D7F /* Build configuration list for PBXProject "freshpoint" */ = {
+		90030DF729F3E22700598D7F /* Build configuration list for PBXProject "FreshPoint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				90030E0829F3E22700598D7F /* Debug */,
