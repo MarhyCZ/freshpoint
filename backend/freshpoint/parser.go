@@ -17,7 +17,7 @@ func FetchProducts() FreshPointCatalog {
 	}
 	defer res.Body.Close()
 	if res.StatusCode != 200 {
-		log.Fatalf("status code error: %d %s", res.StatusCode, res.Status)
+		log.Fatalf("Fetching Freshpoint error: %d %s", res.StatusCode, res.Status)
 	}
 
 	// Load the HTML document
