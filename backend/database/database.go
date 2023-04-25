@@ -18,11 +18,11 @@ import (
 //go:embed migrations/*.sql
 var migrationFs embed.FS
 
-type Database struct {
-	db *sql.DB
+type Repository struct {
+	database *sql.DB
 }
 
-func NewConnection() *Database {
+func NewConnection() *Repository {
 	dbFile := os.Getenv("STORAGE_PATH") + "/database.db"
 	_, err := os.Stat(dbFile)
 	if os.IsNotExist(err) {
@@ -33,7 +33,7 @@ func NewConnection() *Database {
 	if err != nil {
 		log.Fatal("Could not open SQLite database file")
 	}
-	// defer db.Close()
+	// defer database.Close()
 
 	fs, err := iofs.New(migrationFs, "migrations") // Get migrations from sql folder
 	if err != nil {
@@ -50,14 +50,14 @@ func NewConnection() *Database {
 		panic(err)
 	}
 
-	d := &Database{
-		db: db,
+	d := &Repository{
+		database: db,
 	}
 	return d
 }
 
-func (d *Database) ListDevices() []Device {
-	rows, err := d.db.Query(query.ListDevices)
+func (d *Repository) ListDevices() []Device {
+	rows, err := d.database.Query(query.ListDevices)
 	if err != nil {
 		panic(err)
 	}
@@ -77,8 +77,8 @@ func (d *Database) ListDevices() []Device {
 	return devices
 }
 
-func (d *Database) AddDevice(dev Device) {
-	stmt, err := d.db.Prepare("INSERT INTO device(token, registered_at) values(?, ?)")
+func (d *Repository) AddDevice(dev Device) {
+	stmt, err := d.database.Prepare("INSERT INTO device(token, registered_at) values(?, ?)")
 	if err != nil {
 		panic(err)
 	}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"freshpoint/backend/apns"
 	"freshpoint/backend/database"
 	"freshpoint/backend/freshpoint"
 	"github.com/sideshow/apns2"
@@ -8,15 +9,14 @@ import (
 )
 
 var c *cache
-var d *database.Database
-var apns *apns2.Client
+var d *database.Repository
+var n *apns2.Client
 
 func main() {
 	c = newCache()
 	d = database.NewConnection()
-	apns = CreateAPNSClient()
+	n = apns.CreateAPNSClient()
 
-	notify(apns)
 	// Run an auto-update goroutine for "my_data"
 	go c.SetAutoUpdate("freshpoint", 120*time.Second, func() interface{} {
 		println("Updating freshpoint cache")
@@ -25,6 +25,12 @@ func main() {
 		if ok {
 			newProducts := freshpoint.GetNewProducts(old.(freshpoint.FreshPointCatalog).Products, curr.Products)
 			print(newProducts)
+			devices := d.ListDevices()
+			if len(newProducts) > 0 {
+				for _, device := range devices {
+					apns.NotifyNewItems(n, device.Token)
+				}
+			}
 		}
 		return curr
 	})

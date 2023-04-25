@@ -5,6 +5,6 @@ import (
 )
 
 type Device struct {
-	Token        string    `db:"token"`
-	RegisteredAt time.Time `db:"registered_at"`
+	Token        string    `database:"token"`
+	RegisteredAt time.Time `database:"registered_at"`
 }
