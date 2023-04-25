@@ -1,4 +1,4 @@
-package main
+package apns
 
 import (
 	"fmt"
@@ -31,12 +31,9 @@ func CreateAPNSClient() *apns2.Client {
 	return client
 }
 
-func notify(client *apns2.Client) {
-	notification := &apns2.Notification{}
-	notification.DeviceToken = "e04914e1d28e58f01c8af573d46a5c2a492f52b453e5fa71b2e1b7ebde5f9c62"
+func Notify(client *apns2.Client, notification *apns2.Notification) {
 	notification.Topic = "com.marstad.freshpoint"
-	notification.Payload = []byte(`{"aps":{"alert":"Ahooj️ ☀️"}}`) // See Payload section below
-	
+
 	res, err := client.Push(notification)
 
 	if err != nil {
@@ -45,4 +42,11 @@ func notify(client *apns2.Client) {
 
 	fmt.Printf("%v %v %v\n", res.StatusCode, res.ApnsID, res.Reason)
 
+}
+
+func NotifyNewItems(client *apns2.Client, deviceToken string) {
+	notification := &apns2.Notification{}
+	notification.Payload = []byte(`{"aps":{"alert":"Vypadá to, že jsou v automatu nové produkty, jdi to omrknout!"}}`)
+	notification.DeviceToken = deviceToken
+	Notify(client, notification)
 }
