@@ -46,7 +46,7 @@ func Notify(client *apns2.Client, notification *apns2.Notification) {
 
 func NotifyNewItems(client *apns2.Client, deviceToken string) {
 	notification := &apns2.Notification{}
-	notification.Payload = []byte(`{"aps":{"alert":"Vypadá to, že jsou v automatu nové produkty, jdi to omrknout!"}}`)
+	notification.Payload = []byte(`{"aps":{"alert":"V automatu jsou slevy nebo nové produkty, jdi to omrknout!"}}`)
 	notification.DeviceToken = deviceToken
 	Notify(client, notification)
 }

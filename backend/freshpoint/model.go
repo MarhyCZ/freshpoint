@@ -7,6 +7,7 @@ type FoodItem struct {
 	Info     string `json:"info"`
 	Price    int    `json:"price"`
 	Quantity int    `json:"quantity"`
+	Discount bool   `json:"discount"`
 }
 
 type FreshPointCatalog struct {

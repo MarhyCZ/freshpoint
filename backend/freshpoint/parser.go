@@ -62,8 +62,10 @@ func parseFoodProduct(category string, product *goquery.Selection) FoodItem {
 	info := product.Find(".product-info").Text()
 
 	// Get the price
+	discount := false
 	priceString := product.Find(".price").Text()
 	if len(priceString) == 0 {
+		discount = true
 		priceString = product.Find(".text-danger.font-weight-bold").Text()
 	}
 	price, err := strconv.Atoi(strings.Split(priceString, ".")[0])
@@ -85,7 +87,7 @@ func parseFoodProduct(category string, product *goquery.Selection) FoodItem {
 			quantity = -1
 		}
 	}
-	return FoodItem{category, name, imageURL, info, price, quantity}
+	return FoodItem{category, name, imageURL, info, price, quantity, discount}
 }
 
 // Because Freshpoint uses czech labels for div IDs...
