@@ -27,7 +27,7 @@ func CreateAPNSClient() *apns2.Client {
 	// client := apns2.NewClient(cert).Development()
 	// For apps published to the app store or installed as an ad-hoc distribution use Production()
 
-	client := apns2.NewTokenClient(token).Development()
+	client := apns2.NewTokenClient(token).Production()
 	return client
 }
 
