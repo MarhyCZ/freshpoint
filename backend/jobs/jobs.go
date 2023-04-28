@@ -1,6 +1,7 @@
 package jobs
 
 import (
+	"freshpoint/backend/apns"
 	"freshpoint/backend/environment"
 	"freshpoint/backend/freshpoint"
 	"log"
@@ -15,7 +16,7 @@ func Start(e *environment.Env) {
 	go refreshCatalog()
 }
 func refreshCatalog() {
-	ticker := time.NewTicker(10 * time.Second)
+	ticker := time.NewTicker(2 * time.Minute)
 	defer ticker.Stop()
 
 	for range ticker.C {
@@ -25,12 +26,17 @@ func refreshCatalog() {
 		changes := freshpoint.GetChanges(old.Products, new.Products)
 		log.Printf("New products: %d New discounts %d", len(changes.New), len(changes.Discounts))
 
-		/*devices := env.Database.ListDevices()
+		devices := env.Database.ListDevices()
 
-		if len(newProducts) > 0 {
+		if len(changes.New) > 0 {
 			for _, device := range devices {
-				apns.NotifyNewItems(env.Notification, device.Token)
+				apns.NotifyAlert(env.Notification, device.Token, "V automatu jsou nové produkty, jdi to omrknout!")
 			}
-		}*/
+		}
+		if len(changes.Discounts) > 0 {
+			for _, device := range devices {
+				apns.NotifyAlert(env.Notification, device.Token, "V automatu jsou nové slevy, jdi to omrknout!")
+			}
+		}
 	}
 }
