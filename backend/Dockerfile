@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:latest AS build
+FROM golang:latest-alpine AS build
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ RUN go mod download
 # https://docs.docker.com/engine/reference/builder/#copy
 COPY . ./
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /freshpoint
+RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o /freshpoint
 
 # Final stage
 FROM alpine:latest
