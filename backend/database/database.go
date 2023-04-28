@@ -73,7 +73,6 @@ func (d *Database) ListDevices() []Device {
 		devices = append(devices, device)
 	}
 
-	log.Println(devices)
 	return devices
 }
 

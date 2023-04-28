@@ -34,9 +34,9 @@ func index(w http.ResponseWriter, r *http.Request) {
 	// 	return
 	// }
 	// Retrieve the data from cache
-	products := env.Store.Catalog.Products
-	print(products)
-	json.NewEncoder(w).Encode(products)
+	catalog := env.Store.Catalog
+	print(catalog)
+	json.NewEncoder(w).Encode(catalog)
 }
 
 func allowedMethodsMiddleware(next http.Handler) http.Handler {
