@@ -1,5 +1,6 @@
 # Build stage
 FROM golang:alpine AS build
+RUN apk add --no-cache gcc g++ git openssh-client
 
 WORKDIR /app
 
