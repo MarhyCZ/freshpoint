@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"embed"
 	_ "embed"
+	"fmt"
 	"freshpoint/backend/database/query"
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/sqlite3"
@@ -39,7 +40,7 @@ func NewConnection() *Database {
 		log.Fatal(err)
 	}
 
-	m, err := migrate.NewWithSourceInstance("iofs", fs, log.Sprintf("sqlite3://%s", dbFile))
+	m, err := migrate.NewWithSourceInstance("iofs", fs, fmt.Sprintf("sqlite3://%s", dbFile))
 	if err != nil {
 		panic(err)
 	}
