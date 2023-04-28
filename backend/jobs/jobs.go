@@ -38,5 +38,7 @@ func refreshCatalog() {
 				apns.NotifyAlert(env.Notification, device.Token, "V automatu jsou nové slevy, jdi to omrknout!")
 			}
 		}
+
+		env.Store.Catalog = new
 	}
 }
