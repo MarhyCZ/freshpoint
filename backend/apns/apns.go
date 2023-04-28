@@ -1,7 +1,6 @@
 package apns
 
 import (
-	"fmt"
 	"github.com/sideshow/apns2/token"
 	"log"
 	"os"
@@ -40,7 +39,7 @@ func Notify(client *apns2.Client, notification *apns2.Notification) {
 		log.Fatal("Error:", err)
 	}
 
-	fmt.Printf("%v %v %v\n", res.StatusCode, res.ApnsID, res.Reason)
+	log.Printf("%v %v %v\n", res.StatusCode, res.ApnsID, res.Reason)
 
 }
 

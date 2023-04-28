@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"embed"
 	_ "embed"
-	"fmt"
 	"freshpoint/backend/database/query"
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/sqlite3"
@@ -26,7 +25,7 @@ func NewConnection() *Database {
 	dbFile := os.Getenv("STORAGE_PATH") + "/database.db"
 	_, err := os.Stat(dbFile)
 	if os.IsNotExist(err) {
-		fmt.Println("Database file does not exist. Creating...")
+		log.Println("Database file does not exist. Creating...")
 	}
 
 	db, err := sql.Open("sqlite3", dbFile)
@@ -40,7 +39,7 @@ func NewConnection() *Database {
 		log.Fatal(err)
 	}
 
-	m, err := migrate.NewWithSourceInstance("iofs", fs, fmt.Sprintf("sqlite3://%s", dbFile))
+	m, err := migrate.NewWithSourceInstance("iofs", fs, log.Sprintf("sqlite3://%s", dbFile))
 	if err != nil {
 		panic(err)
 	}
@@ -73,7 +72,7 @@ func (d *Database) ListDevices() []Device {
 		devices = append(devices, device)
 	}
 
-	fmt.Println(devices)
+	log.Println(devices)
 	return devices
 }
 
