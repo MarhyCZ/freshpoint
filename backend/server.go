@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"freshpoint/backend/database"
 	"freshpoint/backend/freshpoint"
+	"freshpoint/backend/user"
 	"net/http"
 	"time"
 )
@@ -70,7 +70,7 @@ func handleDevice(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		d.AddDevice(database.Device{
+		d.AddDevice(user.Device{
 			Token:        *t.Token,
 			RegisteredAt: time.Now(),
 		})

@@ -2,19 +2,19 @@ package main
 
 import (
 	"freshpoint/backend/apns"
-	"freshpoint/backend/database"
 	"freshpoint/backend/freshpoint"
+	"freshpoint/backend/user"
 	"github.com/sideshow/apns2"
 	"time"
 )
 
 var c *cache
-var d *database.Repository
+var d *user.UserModel
 var n *apns2.Client
 
 func main() {
 	c = newCache()
-	d = database.NewConnection()
+	d = user.NewConnection()
 	n = apns.CreateAPNSClient()
 
 	// Run an auto-update goroutine for "my_data"
