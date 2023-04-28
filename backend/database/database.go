@@ -1,11 +1,11 @@
-package user
+package database
 
 import (
 	"database/sql"
 	"embed"
 	_ "embed"
 	"fmt"
-	"freshpoint/backend/user/query"
+	"freshpoint/backend/database/query"
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/sqlite3"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
@@ -18,12 +18,12 @@ import (
 //go:embed migrations/*.sql
 var migrationFs embed.FS
 
-type UserModel struct {
+type Database struct {
 	database *sql.DB
 }
 
-func NewConnection() *UserModel {
-	dbFile := os.Getenv("STORAGE_PATH") + "/user.db"
+func NewConnection() *Database {
+	dbFile := os.Getenv("STORAGE_PATH") + "/database.db"
 	_, err := os.Stat(dbFile)
 	if os.IsNotExist(err) {
 		fmt.Println("Database file does not exist. Creating...")
@@ -31,9 +31,9 @@ func NewConnection() *UserModel {
 
 	db, err := sql.Open("sqlite3", dbFile)
 	if err != nil {
-		log.Fatal("Could not open SQLite user file")
+		log.Fatal("Could not open SQLite database file")
 	}
-	// defer user.Close()
+	// defer database.Close()
 
 	fs, err := iofs.New(migrationFs, "migrations") // Get migrations from sql folder
 	if err != nil {
@@ -50,13 +50,13 @@ func NewConnection() *UserModel {
 		panic(err)
 	}
 
-	d := &UserModel{
+	d := &Database{
 		database: db,
 	}
 	return d
 }
 
-func (d *UserModel) ListDevices() []Device {
+func (d *Database) ListDevices() []Device {
 	rows, err := d.database.Query(query.ListDevices)
 	if err != nil {
 		panic(err)
@@ -77,7 +77,7 @@ func (d *UserModel) ListDevices() []Device {
 	return devices
 }
 
-func (d *UserModel) AddDevice(dev Device) {
+func (d *Database) AddDevice(dev Device) {
 	stmt, err := d.database.Prepare("INSERT INTO device(token, registered_at) values(?, ?)")
 	if err != nil {
 		panic(err)

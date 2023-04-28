@@ -1,19 +1,18 @@
-package server
+package api
 
 import (
 	"encoding/json"
-	"fmt"
+	"freshpoint/backend/database"
 	"freshpoint/backend/environment"
-	"freshpoint/backend/freshpoint"
-	"freshpoint/backend/user"
+	"log"
 	"net/http"
 	"time"
 )
 
 var env *environment.Env
 
-func Serve(env *environment.Env) {
-	env = env
+func Serve(e *environment.Env) {
+	env = e
 	mux := http.NewServeMux()
 	mux.Handle("/food", allowedMethodsMiddleware(http.HandlerFunc(index)))
 	mux.HandleFunc("/api/devices", handleDevice)
@@ -23,7 +22,10 @@ func Serve(env *environment.Env) {
 		Handler: mux,
 	}
 
-	srv.ListenAndServe()
+	err := srv.ListenAndServe()
+	if err != nil {
+		log.Fatalf("Could not start listening on port.")
+	}
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
@@ -32,11 +34,9 @@ func index(w http.ResponseWriter, r *http.Request) {
 	// 	return
 	// }
 	// Retrieve the data from cache
-	products, ok := env.Cache.Get("freshpoint")
-	json.NewEncoder(w).Encode(products.(freshpoint.FreshPointCatalog))
-	if !ok {
-		fmt.Println("Could not get data from cache")
-	}
+	products := env.Store.Catalog.Products
+	print(products)
+	json.NewEncoder(w).Encode(products)
 }
 
 func allowedMethodsMiddleware(next http.Handler) http.Handler {
@@ -74,7 +74,7 @@ func handleDevice(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		env.Users.AddDevice(user.Device{
+		env.Database.AddDevice(database.Device{
 			Token:        *t.Token,
 			RegisteredAt: time.Now(),
 		})
