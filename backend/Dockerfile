@@ -17,11 +17,9 @@ FROM alpine:latest
 
 RUN apk --no-cache add ca-certificates
 
-WORKDIR /app
-RUN mkdir -p storage
+RUN mkdir -p /storage
 
-# Slash at end - uses same filename
-COPY --from=build /freshpoint ./
+COPY --from=build /freshpoint /freshpoint
 
 # Optional:
 # To bind to a TCP port, runtime parameters must be supplied to the docker command.
@@ -30,4 +28,4 @@ COPY --from=build /freshpoint ./
 # https://docs.docker.com/engine/reference/builder/#expose
 EXPOSE 8080
 
-CMD ["/app/freshpoint"]
+CMD ["/freshpoint"]

@@ -6,9 +6,9 @@ services:
         environment:
             - PUID=1000
             - PGID=1000
-            - STORAGE_PATH=/app/storage
+            - STORAGE_PATH=/storage
         volumes:
-            - '/home/database/docker/storage/freshpoint:/app/storage'
+            - '/home/database/docker/storage/freshpoint:/storage'
         image: 'marhycz/freshpoint:latest'
         restart: unless-stopped
         labels:
