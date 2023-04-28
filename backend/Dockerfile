@@ -20,7 +20,8 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /app
 RUN mkdir -p storage
 
-COPY --from=build /freshpoint .
+# Slash at end - uses same filename
+COPY --from=build /freshpoint ./
 
 # Optional:
 # To bind to a TCP port, runtime parameters must be supplied to the docker command.
