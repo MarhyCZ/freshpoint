@@ -29,4 +29,4 @@ COPY --from=build /freshpoint .
 # https://docs.docker.com/engine/reference/builder/#expose
 EXPOSE 8080
 
-CMD ["/freshpoint"]
+CMD ["/app/freshpoint"]
