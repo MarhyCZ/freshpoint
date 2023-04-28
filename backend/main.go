@@ -14,6 +14,6 @@ func main() {
 		Store:        environment.NewStore(),
 		Notification: apns.CreateAPNSClient(),
 	}
-	api.Serve(env)
 	jobs.Start(env)
+	api.Serve(env)
 }
