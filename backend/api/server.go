@@ -35,7 +35,6 @@ func index(w http.ResponseWriter, r *http.Request) {
 	// }
 	// Retrieve the data from cache
 	catalog := env.Store.Catalog
-	print(catalog)
 	json.NewEncoder(w).Encode(catalog)
 }
 
