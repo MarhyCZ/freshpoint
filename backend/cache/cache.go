@@ -1,4 +1,4 @@
-package main
+package cache
 
 import (
 	"sync"
@@ -11,12 +11,12 @@ type cachedData struct {
 	updateFunc func() interface{}
 }
 
-type cache struct {
+type Cache struct {
 	data map[string]cachedData
 	lock sync.Mutex
 }
 
-func (c *cache) Get(name string) (interface{}, bool) {
+func (c *Cache) Get(name string) (interface{}, bool) {
 	c.lock.Lock()
 	defer c.lock.Unlock()
 	cachedData, ok := c.data[name]
@@ -26,20 +26,20 @@ func (c *cache) Get(name string) (interface{}, bool) {
 	return cachedData.data, true
 }
 
-func (c *cache) Set(name string, data interface{}, ttl time.Duration, updateFunc func() interface{}) {
+func (c *Cache) Set(name string, data interface{}, ttl time.Duration, updateFunc func() interface{}) {
 	c.lock.Lock()
 	defer c.lock.Unlock()
 	expiration := time.Now().Add(ttl)
 	c.data[name] = cachedData{data: data, expiration: expiration, updateFunc: updateFunc}
 }
 
-func (c *cache) Delete(name string) {
+func (c *Cache) Delete(name string) {
 	c.lock.Lock()
 	defer c.lock.Unlock()
 	delete(c.data, name)
 }
 
-func (c *cache) SetAutoUpdate(name string, ttl time.Duration, updateFunc func() interface{}) {
+func (c *Cache) SetAutoUpdate(name string, ttl time.Duration, updateFunc func() interface{}) {
 	newData := updateFunc()
 	c.Set(name, newData, ttl, updateFunc)
 
@@ -52,8 +52,8 @@ func (c *cache) SetAutoUpdate(name string, ttl time.Duration, updateFunc func() 
 	}
 }
 
-func newCache() *cache {
-	c := &cache{
+func NewCache() *Cache {
+	c := &Cache{
 		data: make(map[string]cachedData),
 	}
 	return c

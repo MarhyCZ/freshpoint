@@ -1,15 +1,19 @@
-package main
+package server
 
 import (
 	"encoding/json"
 	"fmt"
+	"freshpoint/backend/environment"
 	"freshpoint/backend/freshpoint"
 	"freshpoint/backend/user"
 	"net/http"
 	"time"
 )
 
-func serve() {
+var env *environment.Env
+
+func Serve(env *environment.Env) {
+	env = env
 	mux := http.NewServeMux()
 	mux.Handle("/food", allowedMethodsMiddleware(http.HandlerFunc(index)))
 	mux.HandleFunc("/api/devices", handleDevice)
@@ -28,7 +32,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 	// 	return
 	// }
 	// Retrieve the data from cache
-	products, ok := c.Get("freshpoint")
+	products, ok := env.Cache.Get("freshpoint")
 	json.NewEncoder(w).Encode(products.(freshpoint.FreshPointCatalog))
 	if !ok {
 		fmt.Println("Could not get data from cache")
@@ -70,7 +74,7 @@ func handleDevice(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		d.AddDevice(user.Device{
+		env.Users.AddDevice(user.Device{
 			Token:        *t.Token,
 			RegisteredAt: time.Now(),
 		})
