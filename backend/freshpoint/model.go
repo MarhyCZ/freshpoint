@@ -10,9 +10,14 @@ type FoodItem struct {
 	Discounted bool   `json:"discount"`
 }
 
+type CategoryItem struct {
+	Name     string     `json:"name"`
+	Products []FoodItem `json:"products"`
+}
+
 type FridgeCatalog struct {
-	Categories []string   `json:"categories"`
-	Products   []FoodItem `json:"products"`
+	Categories []CategoryItem `json:"categories"`
+	Products   []FoodItem     `json:"products"`
 }
 
 type CatalogChanges struct {

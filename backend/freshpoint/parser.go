@@ -26,21 +26,25 @@ func FetchProducts() FridgeCatalog {
 		log.Fatal(err)
 	}
 
-	categories := make([]string, 0)
+	categories := make([]CategoryItem, 0)
 	products := make([]FoodItem, 0)
 
 	doc.Find("a.nav-link").Each(func(i int, link *goquery.Selection) {
-		category := link.Text()
-		categories = append(categories, category)
+		catName := link.Text()
+		categories = append(categories, CategoryItem{
+			Name:     catName,
+			Products: make([]FoodItem, 0),
+		})
 	})
 
-	for _, category := range categories {
-		selector := "#" + escapeID(category)
+	for index, category := range categories {
+		selector := "#" + escapeID(category.Name)
 		doc.Find(selector).Each(func(i int, div *goquery.Selection) {
 			// For each item found, get the food products
 			div.Find(".col-12.col-sm-6.col-lg-4.mb-5.mb-sm-3").Each(func(i int, productEl *goquery.Selection) {
-				product := parseFoodProduct(category, productEl)
+				product := parseFoodProduct(category.Name, productEl)
 				products = append(products, product)
+				categories[index].Products = append(categories[index].Products, product)
 			})
 		})
 	}
