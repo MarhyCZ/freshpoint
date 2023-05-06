@@ -13,7 +13,7 @@ type Env struct {
 }
 
 type Store struct {
-	Catalog freshpoint.FreshPointCatalog
+	Catalog freshpoint.FridgeCatalog
 }
 
 func NewStore() *Store {

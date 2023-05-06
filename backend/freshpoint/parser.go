@@ -10,7 +10,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func FetchProducts() FreshPointCatalog {
+func FetchProducts() FridgeCatalog {
 	res, err := http.Get("https://my.freshpoint.cz/device/product-list/298")
 	if err != nil {
 		log.Fatal(err)
@@ -45,7 +45,7 @@ func FetchProducts() FreshPointCatalog {
 		})
 	}
 
-	return FreshPointCatalog{
+	return FridgeCatalog{
 		Categories: categories,
 		Products:   products,
 	}

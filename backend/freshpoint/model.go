@@ -10,7 +10,7 @@ type FoodItem struct {
 	Discounted bool   `json:"discount"`
 }
 
-type FreshPointCatalog struct {
+type FridgeCatalog struct {
 	Categories []string   `json:"categories"`
 	Products   []FoodItem `json:"products"`
 }
