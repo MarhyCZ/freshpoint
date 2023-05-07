@@ -8,32 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		90030E0029F3E22700598D7F /* freshpointApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030DFF29F3E22700598D7F /* freshpointApp.swift */; };
-		90030E0229F3E22700598D7F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E0129F3E22700598D7F /* ContentView.swift */; };
 		90030E0429F3E22700598D7F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90030E0329F3E22700598D7F /* Assets.xcassets */; };
 		90030E0729F3E22700598D7F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90030E0629F3E22700598D7F /* Preview Assets.xcassets */; };
 		90030E0F29F3E26800598D7F /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E0E29F3E26800598D7F /* FoodItem.swift */; };
-		90030E1129F3E2C200598D7F /* FoodProductCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E1029F3E2C200598D7F /* FoodProductCatalog.swift */; };
+		90030E1129F3E2C200598D7F /* FridgeCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E1029F3E2C200598D7F /* FridgeCatalog.swift */; };
 		90030E1729F3E3E800598D7F /* FoodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E1629F3E3E800598D7F /* FoodListView.swift */; };
 		90030E1A29F3EB7800598D7F /* Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E1929F3EB7800598D7F /* Fetch.swift */; };
 		90030E1C29F5541F00598D7F /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E1B29F5541F00598D7F /* DeviceManager.swift */; };
 		90030E1E29F5548800598D7F /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E1D29F5548800598D7F /* Device.swift */; };
 		90030E2129F5579100598D7F /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E2029F5579100598D7F /* Data.swift */; };
+		900E731129FC6452006BECED /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E731029FC6452006BECED /* NetworkError.swift */; };
+		900E73132A06CC4C006BECED /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E73122A06CC4C006BECED /* CategoryItem.swift */; };
+		909BF6EA29FA74DD00967238 /* FoodListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BF6E929FA74DD00967238 /* FoodListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		90030DFC29F3E22700598D7F /* freshpoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = freshpoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90030DFF29F3E22700598D7F /* freshpointApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = freshpointApp.swift; sourceTree = "<group>"; };
-		90030E0129F3E22700598D7F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		90030E0329F3E22700598D7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		90030E0629F3E22700598D7F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		90030E0E29F3E26800598D7F /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
-		90030E1029F3E2C200598D7F /* FoodProductCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodProductCatalog.swift; sourceTree = "<group>"; };
+		90030E1029F3E2C200598D7F /* FridgeCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeCatalog.swift; sourceTree = "<group>"; };
 		90030E1629F3E3E800598D7F /* FoodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListView.swift; sourceTree = "<group>"; };
 		90030E1929F3EB7800598D7F /* Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetch.swift; sourceTree = "<group>"; };
 		90030E1B29F5541F00598D7F /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
 		90030E1D29F5548800598D7F /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		90030E2029F5579100598D7F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		90030E2229F59D8000598D7F /* freshpoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = freshpoint.entitlements; sourceTree = "<group>"; };
+		900E731029FC6452006BECED /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		900E73122A06CC4C006BECED /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
+		909BF6E929FA74DD00967238 /* FoodListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +76,6 @@
 				90030E1229F3E37200598D7F /* Scenes */,
 				90030E0D29F3E23B00598D7F /* Model */,
 				90030DFF29F3E22700598D7F /* freshpointApp.swift */,
-				90030E0129F3E22700598D7F /* ContentView.swift */,
 				90030E0329F3E22700598D7F /* Assets.xcassets */,
 				90030E0529F3E22700598D7F /* Preview Content */,
 			);
@@ -91,8 +94,9 @@
 			isa = PBXGroup;
 			children = (
 				90030E0E29F3E26800598D7F /* FoodItem.swift */,
-				90030E1029F3E2C200598D7F /* FoodProductCatalog.swift */,
+				90030E1029F3E2C200598D7F /* FridgeCatalog.swift */,
 				90030E1D29F5548800598D7F /* Device.swift */,
+				900E73122A06CC4C006BECED /* CategoryItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -100,17 +104,19 @@
 		90030E1229F3E37200598D7F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				90030E1329F3E38700598D7F /* Food */,
+				900E73142A07A9FA006BECED /* Settings */,
+				90030E1329F3E38700598D7F /* FoodList */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
 		};
-		90030E1329F3E38700598D7F /* Food */ = {
+		90030E1329F3E38700598D7F /* FoodList */ = {
 			isa = PBXGroup;
 			children = (
 				90030E1629F3E3E800598D7F /* FoodListView.swift */,
+				909BF6E929FA74DD00967238 /* FoodListViewModel.swift */,
 			);
-			path = Food;
+			path = FoodList;
 			sourceTree = "<group>";
 		};
 		90030E1829F3EB6A00598D7F /* Network */ = {
@@ -118,6 +124,7 @@
 			children = (
 				90030E1929F3EB7800598D7F /* Fetch.swift */,
 				90030E1B29F5541F00598D7F /* DeviceManager.swift */,
+				900E731029FC6452006BECED /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -128,6 +135,13 @@
 				90030E2029F5579100598D7F /* Data.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		900E73142A07A9FA006BECED /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,12 +216,14 @@
 			files = (
 				90030E1A29F3EB7800598D7F /* Fetch.swift in Sources */,
 				90030E1729F3E3E800598D7F /* FoodListView.swift in Sources */,
-				90030E0229F3E22700598D7F /* ContentView.swift in Sources */,
+				909BF6EA29FA74DD00967238 /* FoodListViewModel.swift in Sources */,
 				90030E0F29F3E26800598D7F /* FoodItem.swift in Sources */,
 				90030E0029F3E22700598D7F /* freshpointApp.swift in Sources */,
-				90030E1129F3E2C200598D7F /* FoodProductCatalog.swift in Sources */,
+				90030E1129F3E2C200598D7F /* FridgeCatalog.swift in Sources */,
 				90030E1C29F5541F00598D7F /* DeviceManager.swift in Sources */,
 				90030E2129F5579100598D7F /* Data.swift in Sources */,
+				900E731129FC6452006BECED /* NetworkError.swift in Sources */,
+				900E73132A06CC4C006BECED /* CategoryItem.swift in Sources */,
 				90030E1E29F5548800598D7F /* Device.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,7 +352,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = freshpoint/freshpoint.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"freshpoint/Preview Content\"";
 				DEVELOPMENT_TEAM = FBWNLT2RLU;
 				ENABLE_PREVIEWS = YES;
@@ -347,6 +363,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -354,6 +371,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marstad.freshpoint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -367,7 +387,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = freshpoint/freshpoint.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"freshpoint/Preview Content\"";
 				DEVELOPMENT_TEAM = FBWNLT2RLU;
 				ENABLE_PREVIEWS = YES;
@@ -378,6 +398,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -385,6 +406,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marstad.freshpoint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

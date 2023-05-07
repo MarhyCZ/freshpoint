@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct FreshPointCatalog {
-    let categories: [String]
+struct FridgeCatalog {
+    let categories: [CategoryItem]
     let products: [FoodItem]
 }
 
-extension FreshPointCatalog: Decodable {}
+extension FridgeCatalog: Decodable {}

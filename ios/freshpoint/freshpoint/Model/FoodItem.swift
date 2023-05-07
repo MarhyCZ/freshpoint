@@ -14,12 +14,13 @@ struct FoodItem {
     let info: String
     let price: Int
     let quantity: Int
+    let discount: Bool
 }
 
 // MARK: - Conformances
 extension FoodItem: Identifiable {
-    var id: Int {
-        return self.hashValue
+    var id: String {
+        return self.name
     }
 }
 extension FoodItem: Equatable {}
@@ -37,7 +38,8 @@ extension FoodItem {
             imageURL: URL(string: "https://images.weserv.nl/?url=http://freshpoint.freshserver.cz/backend/web/media/photo/b8cc58cdf7ce2667e9386088322cd3f137d257b7485873c489a6d822b6ad04af.jpg"),
             info: "Super zdrava potravina",
             price: 20,
-            quantity: 1
+            quantity: 1,
+            discount: false
         ),
         .init(
             category: "Nápoje",
@@ -45,7 +47,8 @@ extension FoodItem {
             imageURL: URL(string: "https://images.weserv.nl/?url=http://freshpoint.freshserver.cz/backend/web/media/photo/48d84b0dfa262a452a6580caf263492d1e53ef5c4587715214f8693c7843ed2e.jpg"),
             info: "Super zdrava potravina",
             price: 55,
-            quantity: 4
+            quantity: 4,
+            discount: true
         ),
     ]
 }

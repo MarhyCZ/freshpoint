@@ -13,27 +13,32 @@ struct freshpointApp: App {
     
     var body: some Scene {
         WindowGroup {
-            VStack {
-                Button("Zapni si notifikace") {
-                    let center = UNUserNotificationCenter.current()
-                    center.requestAuthorization(options: [.alert, .sound]) { granted, error in
-                        if let error = error {
-                            // Handle the error here.
-                        }
-                        if granted {
-                            print("Granted")
-                            DispatchQueue.main.async {
-                                UIApplication.shared.registerForRemoteNotifications()
+            TabView {
+                FoodListView()
+                    .tabItem {
+                        Label("Menu", systemImage: "takeoutbag.and.cup.and.straw").labelStyle(.iconOnly)
+                    }
+                List {
+                    Button("Zapni si notifikace") {
+                        
+                        let center = UNUserNotificationCenter.current()
+                        center.requestAuthorization(options: [.alert, .sound]) { granted, error in
+                            if let error = error {
+                                // Handle the error here.
+                            }
+                            if granted {
+                                print("Granted")
+                                DispatchQueue.main.async {
+                                    UIApplication.shared.registerForRemoteNotifications()
+                                }
                             }
                         }
                     }
-                }
-                
-                FoodListView()
-            }
+                }.tabItem{
+                    Label("Nastavení", systemImage: "location").labelStyle(.iconOnly)}
+            }.tableStyle(.inset)
         }
     }
-    
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
@@ -41,10 +46,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         print("Sending token...")
         print(deviceToken.hexString)
         DeviceManager().sendDeviceTokenToServer(data: deviceToken)
-       }
+    }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-
+        
         print("\(error)")
     }
 }
