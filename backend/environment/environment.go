@@ -14,12 +14,15 @@ type Env struct {
 
 type Store struct {
 	Catalog freshpoint.FridgeCatalog
+	Fridges []freshpoint.Fridge
 }
 
 func NewStore() *Store {
 	catalog := freshpoint.FetchProducts()
+	fridges := freshpoint.FetchFridges()
 
 	return &Store{
 		catalog,
+		fridges,
 	}
 }

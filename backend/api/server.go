@@ -16,6 +16,7 @@ func Serve(e *environment.Env) {
 	mux := http.NewServeMux()
 	mux.Handle("/food", allowedMethodsMiddleware(http.HandlerFunc(index)))
 	mux.HandleFunc("/api/devices", handleDevice)
+	mux.HandleFunc("/api/freshpoint", handleFreshpoint)
 
 	srv := &http.Server{
 		Addr:    ":8080",
@@ -36,6 +37,11 @@ func index(w http.ResponseWriter, r *http.Request) {
 	// Retrieve the data from cache
 	catalog := env.Store.Catalog
 	json.NewEncoder(w).Encode(catalog)
+}
+
+func handleFreshpoint(w http.ResponseWriter, r *http.Request) {
+	fridges := env.Store.Fridges
+	json.NewEncoder(w).Encode(fridges)
 }
 
 func allowedMethodsMiddleware(next http.Handler) http.Handler {

@@ -14,6 +14,7 @@ func Start(e *environment.Env) {
 	env = e
 	println("Setting up jobs")
 	go refreshCatalog()
+	go refreshFridges()
 }
 func refreshCatalog() {
 	ticker := time.NewTicker(2 * time.Minute)
@@ -40,5 +41,16 @@ func refreshCatalog() {
 		}
 
 		env.Store.Catalog = new
+	}
+}
+
+func refreshFridges() {
+	ticker := time.NewTicker(60 * time.Minute)
+	defer ticker.Stop()
+
+	for range ticker.C {
+		println("Updating fridges list")
+		new := freshpoint.FetchFridges()
+		env.Store.Fridges = new
 	}
 }

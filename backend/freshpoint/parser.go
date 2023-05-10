@@ -1,9 +1,12 @@
 package freshpoint
 
 import (
+	"encoding/json"
+	"io"
 	"log"
 	"net/http"
 	"net/url"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -105,4 +108,32 @@ func escapeID(id string) string {
 	escapedID = strings.ReplaceAll(escapedID, "%", "\\%")
 
 	return escapedID
+}
+
+func FetchFridges() []Fridge {
+	res, err := http.Get("https://my.freshpoint.cz")
+	log.Println("Fetching Fridges list")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer res.Body.Close()
+	if res.StatusCode != 200 {
+		log.Fatalf("Fetching Freshpoint Fridges list error: %d %s", res.StatusCode, res.Status)
+	}
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		log.Println("Error in parsing body response to text in Freshpoint devices list")
+	}
+
+	var exp, _ = regexp.Compile(`devices = "(.+)";`)
+	matches := exp.FindStringSubmatch(string(body))
+	jsString := strings.ReplaceAll(matches[1], "\\", "")
+	println(jsString)
+	var fridges []Fridge
+	err = json.Unmarshal([]byte(jsString), &fridges)
+	if err != nil {
+		log.Print("Error while parsing fridge list JSON into struct: ")
+		log.Println(err.Error())
+	}
+	return fridges
 }
