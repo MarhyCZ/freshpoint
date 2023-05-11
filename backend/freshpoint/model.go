@@ -1,5 +1,7 @@
 package freshpoint
 
+import "encoding/json"
+
 type FoodItem struct {
 	Category   string `json:"category"`
 	Name       string `json:"name"`
@@ -30,19 +32,19 @@ type Fridge struct {
 	Location FridgeLocation `json:"location"`
 }
 type FridgeProp struct {
-	Id        int    `json:"id"`
-	Username  string `json:"username"`
-	Address   string `json:"address"`
-	Lat       string `json:"lat"`
-	Lon       string `json:"lon"`
-	Active    int    `json:"active"`
-	Discount  int    `json:"discount"`
-	Suspended int    `json:"suspended"`
+	Id        int         `json:"id"`
+	Username  string      `json:"username"`
+	Address   string      `json:"address"`
+	Lat       json.Number `json:"lat"`
+	Lon       json.Number `json:"lon"`
+	Active    int         `json:"active"`
+	Discount  int         `json:"discount"`
+	Suspended int         `json:"suspended"`
 }
 
 type FridgeLocation struct {
-	Name    string `json:"name"`
-	Address string `json:"address"`
-	Lat     string `json:"lat"`
-	Lon     string `json:"lon"`
+	Name    string      `json:"name"`
+	Address string      `json:"address"`
+	Lat     json.Number `json:"lat"`
+	Lon     json.Number `json:"lon"`
 }
