@@ -41,10 +41,10 @@ struct FoodListView: View {
             HStack() {
                 Text("O2 Czech republic")
                 Spacer()
-                Button {
-                    print("Edit button was tapped")
+                NavigationLink {
+                    SettingsView()
                 } label: {
-                    Image(systemName: "location")
+                    Label("Změnit", systemImage: "location")
                 }
             }
             .padding(.horizontal)

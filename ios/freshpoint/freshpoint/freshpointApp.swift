@@ -13,15 +13,8 @@ struct freshpointApp: App {
     
     var body: some Scene {
         WindowGroup {
-            TabView {
-                FoodListView()
-                    .tabItem {
-                        Label("Menu", systemImage: "takeoutbag.and.cup.and.straw").labelStyle(.iconOnly)
-                    }
-                    SettingsView()
-                    .tabItem{
-                    Label("Nastavení", systemImage: "location").labelStyle(.iconOnly)}
-            }.tableStyle(.inset)
+            FoodListView()
+
         }
     }
 }
