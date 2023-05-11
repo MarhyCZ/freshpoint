@@ -19,6 +19,11 @@
 		90030E2129F5579100598D7F /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90030E2029F5579100598D7F /* Data.swift */; };
 		900E731129FC6452006BECED /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E731029FC6452006BECED /* NetworkError.swift */; };
 		900E73132A06CC4C006BECED /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E73122A06CC4C006BECED /* CategoryItem.swift */; };
+		900E73362A0D6294006BECED /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E73352A0D6294006BECED /* SettingsView.swift */; };
+		900E73382A0D65E3006BECED /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E73372A0D65E3006BECED /* Constants.swift */; };
+		900E733A2A0D68E2006BECED /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E73392A0D68E2006BECED /* Fridge.swift */; };
+		900E733C2A0D6A0E006BECED /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E733B2A0D6A0E006BECED /* SettingsViewModel.swift */; };
+		900E73402A0D7C16006BECED /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E733F2A0D7C16006BECED /* LocationManager.swift */; };
 		909BF6EA29FA74DD00967238 /* FoodListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BF6E929FA74DD00967238 /* FoodListViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +42,12 @@
 		90030E2229F59D8000598D7F /* freshpoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = freshpoint.entitlements; sourceTree = "<group>"; };
 		900E731029FC6452006BECED /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		900E73122A06CC4C006BECED /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
+		900E73352A0D6294006BECED /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		900E73372A0D65E3006BECED /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		900E73392A0D68E2006BECED /* Fridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fridge.swift; sourceTree = "<group>"; };
+		900E733B2A0D6A0E006BECED /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		900E733D2A0D7943006BECED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		900E733F2A0D7C16006BECED /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		909BF6E929FA74DD00967238 /* FoodListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,12 +81,15 @@
 		90030DFE29F3E22700598D7F /* freshpoint */ = {
 			isa = PBXGroup;
 			children = (
+				900E733D2A0D7943006BECED /* Info.plist */,
 				90030E2229F59D8000598D7F /* freshpoint.entitlements */,
 				90030E1F29F5578700598D7F /* Extensions */,
+				900E733E2A0D7BE2006BECED /* Location */,
+				90030E0D29F3E23B00598D7F /* Model */,
 				90030E1829F3EB6A00598D7F /* Network */,
 				90030E1229F3E37200598D7F /* Scenes */,
-				90030E0D29F3E23B00598D7F /* Model */,
 				90030DFF29F3E22700598D7F /* freshpointApp.swift */,
+				900E73372A0D65E3006BECED /* Constants.swift */,
 				90030E0329F3E22700598D7F /* Assets.xcassets */,
 				90030E0529F3E22700598D7F /* Preview Content */,
 			);
@@ -97,6 +111,7 @@
 				90030E1029F3E2C200598D7F /* FridgeCatalog.swift */,
 				90030E1D29F5548800598D7F /* Device.swift */,
 				900E73122A06CC4C006BECED /* CategoryItem.swift */,
+				900E73392A0D68E2006BECED /* Fridge.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,8 +155,18 @@
 		900E73142A07A9FA006BECED /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				900E73352A0D6294006BECED /* SettingsView.swift */,
+				900E733B2A0D6A0E006BECED /* SettingsViewModel.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		900E733E2A0D7BE2006BECED /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				900E733F2A0D7C16006BECED /* LocationManager.swift */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,11 +243,16 @@
 				90030E1729F3E3E800598D7F /* FoodListView.swift in Sources */,
 				909BF6EA29FA74DD00967238 /* FoodListViewModel.swift in Sources */,
 				90030E0F29F3E26800598D7F /* FoodItem.swift in Sources */,
+				900E73402A0D7C16006BECED /* LocationManager.swift in Sources */,
+				900E733A2A0D68E2006BECED /* Fridge.swift in Sources */,
+				900E733C2A0D6A0E006BECED /* SettingsViewModel.swift in Sources */,
 				90030E0029F3E22700598D7F /* freshpointApp.swift in Sources */,
 				90030E1129F3E2C200598D7F /* FridgeCatalog.swift in Sources */,
 				90030E1C29F5541F00598D7F /* DeviceManager.swift in Sources */,
+				900E73382A0D65E3006BECED /* Constants.swift in Sources */,
 				90030E2129F5579100598D7F /* Data.swift in Sources */,
 				900E731129FC6452006BECED /* NetworkError.swift in Sources */,
+				900E73362A0D6294006BECED /* SettingsView.swift in Sources */,
 				900E73132A06CC4C006BECED /* CategoryItem.swift in Sources */,
 				90030E1E29F5548800598D7F /* Device.swift in Sources */,
 			);
@@ -352,12 +382,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = freshpoint/freshpoint.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"freshpoint/Preview Content\"";
 				DEVELOPMENT_TEAM = FBWNLT2RLU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = freshpoint/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Přístup k poloze umožní zobrazit nejbližší automaty";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -371,9 +403,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marstad.freshpoint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -387,12 +419,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = freshpoint/freshpoint.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"freshpoint/Preview Content\"";
 				DEVELOPMENT_TEAM = FBWNLT2RLU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = freshpoint/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Přístup k poloze umožní zobrazit nejbližší automaty";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -406,9 +440,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marstad.freshpoint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

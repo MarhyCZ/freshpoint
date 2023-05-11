@@ -10,7 +10,7 @@ import Foundation
 struct DeviceManager {
     
     func sendDeviceTokenToServer(data deviceToken: Data) {
-        let url = URL(string: "https://freshpoint.mb.marstad.cz/api/devices")!
+        let url = URL(string: "/api/devices", relativeTo: Constants.baseURL)!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
