@@ -13,23 +13,18 @@ struct FoodListView: View {
     @State private var currentCategory: String = "Nápoje"
     
     var body: some View {
-        ZStack {
+        NavigationStack {
             switch viewModel.state {
             case .loading, .failed, .initial:
                 ProgressView()
             case .fetched:
                 makeList(from: viewModel.catalog.categories)
+                    .padding(.top, 40)
                     .overlay(alignment: .top) {
                         makeHeader(from: viewModel.catalog.categories)
                     }
             }
         }
-        .overlay(alignment: .top, content: {
-            Color.clear // Or any view or color
-                .background(.regularMaterial) // I put clear here because I prefer to put a blur in this case. This modifier and the material it contains are optional.
-                .edgesIgnoringSafeArea(.top)
-                .frame(height: 0) // This will constrain the overlay to only go above the top safe area and not under.
-        })
         .task {
             await viewModel.fetch()
         }.onChange(of: scenePhase) { newPhase in
@@ -42,58 +37,68 @@ struct FoodListView: View {
     }
     
     func makeHeader(from categories: [CategoryItem]) -> some View {
-        ScrollViewReader { reader in
-            ScrollView(.horizontal) {
-                HStack {
-                    ForEach(categories) { category in
-                        Text(category.name)
-                            .fontWeight(category.name == currentCategory ? .bold : .regular)
-                            .foregroundColor(category.name == currentCategory ? .accentColor : .primary)
-                            .padding()
-                            .tag(category.name)
-                    }
+        VStack {
+            HStack() {
+                Text("O2 Czech republic")
+                Spacer()
+                Button {
+                    print("Edit button was tapped")
+                } label: {
+                    Image(systemName: "location")
                 }
-                .background(Color.clear)
-                .listRowInsets(EdgeInsets(
-                    top: 0,
-                    leading: 0,
-                    bottom: 0,
-                    trailing: 0))
             }
-            .background(.thinMaterial)
-            .onChange(of: currentCategory) { newCategory in
-                withAnimation(.easeInOut) {
-                    reader.scrollTo(newCategory)
+            .padding(.horizontal)
+            ScrollViewReader { reader in
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(categories) { category in
+                            Text(category.name)
+                                .fontWeight(category.name == currentCategory ? .bold : .regular)
+                                .foregroundColor(category.name == currentCategory ? .accentColor : .primary)
+                                .padding()
+                                .tag(category.name)
+                        }
+                    }
                     
+                }
+                .onChange(of: currentCategory) { newCategory in
+                    withAnimation(.easeOut) {
+                        reader.scrollTo(newCategory, anchor: .center)
+                        
+                    }
                 }
             }
         }
+        .background(.thinMaterial)
         
     }
     
     func makeList(from categories: [CategoryItem]) -> some View {
         List(categories) { category in
-            VStack(alignment: .leading) {
+            VStack(alignment: .listRowSeparatorLeading) {
                 GeometryReader { geometry in
                     EmptyView().onChange(of: geometry.frame(in: .global)) { globalFrame in
                         let offset = globalFrame.minY
                         print("\(category.name): \(offset)")
-                        let height = UIApplication.shared.windows.first!.safeAreaInsets.top + 100
-                        if offset < height {
-                            currentCategory = category.name
+#if os(iOS)
+                        let window = UIApplication.firstKeyWindowForConnectedScenes
+                        let height = window?.safeAreaInsets.top
+#elseif os(macOS)
+                        let window = NSApplication.shared.keyWindow
+                        let height = window?.contentView!.safeAreaInsets.top
+#endif
+                        
+                        if let height {
+                            if offset < height + 200 &&
+                                currentCategory != category.name {
+                                currentCategory = category.name
+                            }
                         }
                     }
                 }.frame(width: 0,height: 0)
-                Text(category.name).padding().font(.title)
+                Text(category.name).padding().font(.title).bold()
                 ForEach(category.products) { item in
-                    HStack {
-                        AsyncImage(url: item.imageURL) { image in
-                            image.resizable().aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .frame(width: 100, height: 100)
-                        
+                    HStack() {
                         VStack(alignment: .leading) {
                             Text(item.name)
                             Text("\(item.price),- Kč")
@@ -101,7 +106,18 @@ struct FoodListView: View {
                             Text("Kusů: \(item.quantity)")
                                 .foregroundColor(.gray)
                         }
+                        Spacer()
+                        AsyncImage(url: item.imageURL) { image in
+                            image.resizable().aspectRatio(contentMode: .fit)
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .frame(width: 100, height: 100)
+                        .background(.white)
+                        .cornerRadius(10)
+                        
                     }
+                    .padding(.vertical, 10)
                     .listRowSeparator(.hidden)
                 }
                 .tag(category.name)
