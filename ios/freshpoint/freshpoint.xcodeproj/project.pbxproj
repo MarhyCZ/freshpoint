@@ -24,6 +24,7 @@
 		900E733A2A0D68E2006BECED /* Fridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E73392A0D68E2006BECED /* Fridge.swift */; };
 		900E733C2A0D6A0E006BECED /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E733B2A0D6A0E006BECED /* SettingsViewModel.swift */; };
 		900E73402A0D7C16006BECED /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E733F2A0D7C16006BECED /* LocationManager.swift */; };
+		905E72382A0EB65D00CB8552 /* FoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905E72372A0EB65D00CB8552 /* FoodDetailView.swift */; };
 		909BF6EA29FA74DD00967238 /* FoodListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BF6E929FA74DD00967238 /* FoodListViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		900E733B2A0D6A0E006BECED /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		900E733D2A0D7943006BECED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		900E733F2A0D7C16006BECED /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		905E72372A0EB65D00CB8552 /* FoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailView.swift; sourceTree = "<group>"; };
 		909BF6E929FA74DD00967238 /* FoodListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 		90030E1229F3E37200598D7F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				905E72392A0EB6AC00CB8552 /* FoodDetail */,
 				900E73142A07A9FA006BECED /* Settings */,
 				90030E1329F3E38700598D7F /* FoodList */,
 			);
@@ -167,6 +170,14 @@
 				900E733F2A0D7C16006BECED /* LocationManager.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		905E72392A0EB6AC00CB8552 /* FoodDetail */ = {
+			isa = PBXGroup;
+			children = (
+				905E72372A0EB65D00CB8552 /* FoodDetailView.swift */,
+			);
+			path = FoodDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +253,7 @@
 				90030E1A29F3EB7800598D7F /* Fetch.swift in Sources */,
 				90030E1729F3E3E800598D7F /* FoodListView.swift in Sources */,
 				909BF6EA29FA74DD00967238 /* FoodListViewModel.swift in Sources */,
+				905E72382A0EB65D00CB8552 /* FoodDetailView.swift in Sources */,
 				90030E0F29F3E26800598D7F /* FoodItem.swift in Sources */,
 				900E73402A0D7C16006BECED /* LocationManager.swift in Sources */,
 				900E733A2A0D68E2006BECED /* Fridge.swift in Sources */,
@@ -395,7 +407,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -432,7 +444,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -74,61 +74,65 @@ struct FoodListView: View {
     }
     
     func makeList(from categories: [CategoryItem]) -> some View {
-        List(categories) { category in
-            VStack(alignment: .listRowSeparatorLeading) {
-                GeometryReader { geometry in
-                    EmptyView().onChange(of: geometry.frame(in: .global)) { globalFrame in
-                        let offset = globalFrame.minY
-                        print("\(category.name): \(offset)")
+        ScrollView {
+                ForEach(categories) { category in
+                    // Scrollspy
+                    GeometryReader { geometry in
+                        EmptyView().onChange(of: geometry.frame(in: .global)) { globalFrame in
+                            let offset = globalFrame.minY
+                            print("\(category.name): \(offset)")
 #if os(iOS)
-                        let window = UIApplication.firstKeyWindowForConnectedScenes
-                        let height = window?.safeAreaInsets.top
+                            let window = UIApplication.firstKeyWindowForConnectedScenes
+                            let height = window?.safeAreaInsets.top
 #elseif os(macOS)
-                        let window = NSApplication.shared.keyWindow
-                        let height = window?.contentView!.safeAreaInsets.top
+                            let window = NSApplication.shared.keyWindow
+                            let height = window?.contentView!.safeAreaInsets.top
 #endif
-                        
-                        if let height {
-                            if offset < height + 200 &&
-                                currentCategory != category.name {
-                                currentCategory = category.name
+                            
+                            if let height {
+                                if offset < height + 200 &&
+                                    currentCategory != category.name {
+                                    currentCategory = category.name
+                                }
                             }
                         }
-                    }
-                }.frame(width: 0,height: 0)
-                Text(category.name).padding().font(.title).bold()
-                ForEach(category.products) { item in
-                    HStack() {
-                        VStack(alignment: .leading) {
-                            Text(item.name)
-                            Text("\(item.price),- Kč")
-                                .foregroundColor(item.discount ? .red : .gray)
-                            Text("Kusů: \(item.quantity)")
-                                .foregroundColor(.gray)
+                    }.frame(width: 0,height: 0)
+                    // Scrollspy
+                    
+                    VStack(alignment: .listRowSeparatorLeading) {
+                        Text(category.name)
+                            .font(.title)
+                            .bold()
+                        ForEach(category.products) { item in
+                            NavigationLink(destination: FoodDetailView(foodItem: item)) {
+                                HStack() {
+                                    VStack(alignment: .listRowSeparatorLeading) {
+                                        Text(item.name).multilineTextAlignment(.leading)
+                                        Text("\(item.price),- Kč")
+                                            .foregroundColor(item.discount ? .red : .gray)
+                                        Text("Kusů: \(item.quantity)")
+                                            .foregroundColor(.gray)
+                                    }
+                                    Spacer()
+                                    AsyncImage(url: item.imageURL) { image in
+                                        image.resizable().aspectRatio(contentMode: .fit)
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                    .frame(width: 100, height: 100)
+                                    .background(.white)
+                                    .cornerRadius(10)
+                                }
+                                .padding(.vertical, 10)
+                                .listRowSeparator(.hidden)
+                            }
                         }
-                        Spacer()
-                        AsyncImage(url: item.imageURL) { image in
-                            image.resizable().aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            ProgressView()
-                        }
-                        .frame(width: 100, height: 100)
-                        .background(.white)
-                        .cornerRadius(10)
-                        
+                        .tag(category.name)
                     }
-                    .padding(.vertical, 10)
-                    .listRowSeparator(.hidden)
-                }
-                .tag(category.name)
-            }
-            
+                }.padding()
         }
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
     }
 }
-
 
 struct FoodListView_Previews: PreviewProvider {
     static var previews: some View {
