@@ -22,8 +22,7 @@ import Foundation
         state = .loading
         
         do {
-            let data = try await FoodItemFetcher().fetch()
-            print(data)
+            let data = try await FoodItemFetcher().fetchCatalog()
             catalog = data
             state = .fetched
         } catch {

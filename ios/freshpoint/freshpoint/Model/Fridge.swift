@@ -15,7 +15,7 @@ struct Fridge {
     var corelocation: CLLocation {
         return CLLocation(latitude: location.lat, longitude: location.lon)
     }
-    var userDistance: CLLocationDistance = 1000
+    var userDistance: Measurement = Measurement(value: 1000, unit: UnitLength.meters)
 }
 
 extension Fridge: HasLocations {}

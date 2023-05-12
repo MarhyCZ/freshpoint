@@ -43,7 +43,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         for locationStruct in locationStructs {
             let distance = location.distance(from: locationStruct.corelocation)
             var newStruct = locationStruct
-            newStruct.userDistance = distance
+            newStruct.userDistance = Measurement(value: distance, unit: UnitLength.meters)
             newStructs.append(newStruct)
         }
         return newStructs
@@ -52,5 +52,5 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 
 protocol HasLocations {
     var corelocation: CLLocation { get }
-    var userDistance: CLLocationDistance { get set }
+    var userDistance: Measurement<UnitLength> { get set }
 }

@@ -11,7 +11,8 @@ import UserNotifications
 
 struct SettingsView: View {
     @StateObject var viewModel = SettingsViewModel()
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50.04874970601164, longitude: 14.414124182262928), span: MKCoordinateSpan(latitudeDelta: 2, longitudeDelta: 2))
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50.04874970601164, longitude: 14.414124182262928), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
+    @State private var selected = 1
 #if os(iOS)
     @UIApplicationDelegateAdaptor var delegate: AppDelegate
 #elseif os(macOS)
@@ -19,7 +20,7 @@ struct SettingsView: View {
 #endif
     
     var body: some View {
-        VStack {
+        ZStack(alignment: .bottom) {
             Map(coordinateRegion: $region, annotationItems: viewModel.fridges) {
                 MapAnnotation(coordinate: $0.corelocation.coordinate) {
                     Image(systemName: "refrigerator.fill")
@@ -28,21 +29,10 @@ struct SettingsView: View {
                         .padding(10)
                         .background(Color.accentColor)
                         .clipShape(Circle())
-                        
+                    
                 }
-                    }
-                    .frame(width: 400, height: 600)
-            Button("Aktualizovat vzdálenost") {
-                viewModel.locationManager.requestLocation()
-                viewModel.updateFridgesDistance()
             }
-            List {
-                ForEach(viewModel.fridges) { fridge in
-                    VStack(alignment:.leading) {
-                        Text(fridge.location.name)
-                        Text(fridge.userDistance.description).font(.caption)
-                    }
-                }
+            VStack(spacing: 10) {
                 Button("Zapni si notifikace") {
                     let center = UNUserNotificationCenter.current()
                     center.requestAuthorization(options: [.alert, .sound]) { granted, error in
@@ -61,11 +51,24 @@ struct SettingsView: View {
                         }
                     }
                 }
-            }
+                List {
+                    ForEach(viewModel.fridges) { fridge in
+                        VStack(alignment:.leading) {
+                            Text(fridge.location.name)
+                            Text(fridge.userDistance.converted(to: UnitLength.kilometers).value.description).font(.caption)
+                        }.listRowBackground(Color.clear)
+                    }
+                }
+                .listStyle(PlainListStyle())
+            }.frame(height: 200).padding(.vertical).background(.thinMaterial).cornerRadius(30)
         }
         .ignoresSafeArea()
         .task {
             await viewModel.fetch()
+            viewModel.locationManager.requestLocation()
+            viewModel.updateFridgesDistance()
+            region.center = viewModel.locationManager.location.coordinate
+            region.span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
         }
     }
 }

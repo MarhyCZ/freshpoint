@@ -19,7 +19,7 @@ struct FoodListView: View {
                 ProgressView()
             case .fetched:
                 makeList(from: viewModel.catalog.categories)
-                    .padding(.top, 40)
+                    .padding(.top, 80)
                     .overlay(alignment: .top) {
                         makeHeader(from: viewModel.catalog.categories)
                     }
@@ -39,7 +39,7 @@ struct FoodListView: View {
     func makeHeader(from categories: [CategoryItem]) -> some View {
         VStack {
             HStack() {
-                Text("O2 Czech republic")
+                Text("O2 Czech Republic a.s.")
                 Spacer()
                 NavigationLink {
                     SettingsView()

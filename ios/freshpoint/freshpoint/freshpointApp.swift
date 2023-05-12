@@ -13,7 +13,7 @@ struct freshpointApp: App {
     
     var body: some Scene {
         WindowGroup {
-            FoodListView()
+                FoodListView()
 
         }
     }
