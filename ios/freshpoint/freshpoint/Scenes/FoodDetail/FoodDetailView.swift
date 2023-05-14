@@ -17,14 +17,14 @@ struct FoodDetailView: View {
             Text(foodItem.info)
             Text(foodItem.price.description)
         }
-        Text("Hey")
     }
     
 }
 
-
+#if DEBUG
 struct FoodDetailView_Previews: PreviewProvider {
     static var previews: some View {
         FoodDetailView(foodItem: FoodItem.mockedFoodProducts[0])
     }
 }
+#endif
