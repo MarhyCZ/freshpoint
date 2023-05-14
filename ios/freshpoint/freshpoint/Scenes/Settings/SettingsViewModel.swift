@@ -7,6 +7,8 @@
 
 import Foundation
 import CoreLocation
+import UserNotifications
+import MapKit
 
 @MainActor final class SettingsViewModel: ObservableObject {
     enum State {
@@ -19,6 +21,9 @@ import CoreLocation
     @Published var state: State = .initial
     @Published var fridges: [Fridge] = [Fridge]()
     @Published var locationManager = LocationManager()
+    @Published var closestFridge: Fridge?
+    @Published var selectedFridge: Fridge?
+    @Published var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50.04874970601164, longitude: 14.414124182262928), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
     
     func fetch() async {
         state = .loading
@@ -32,19 +37,36 @@ import CoreLocation
             state = .failed
         }
         
+        updateFridgesDistance()
+        mapRegion.center = locationManager.location.coordinate
+        mapRegion.span = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
+        
     }
     
     func updateFridgesDistance() {
+        locationManager.requestLocation()
         fridges = locationManager.calculateDistance(from: fridges)
         fridges = fridges.sorted (by: { $0.userDistance < $1.userDistance })
+        closestFridge = fridges[0]
+        selectedFridge = closestFridge
     }
-    func closestLocation(locations: [CLLocation], closestToLocation location: CLLocation) -> CLLocation? {
-        if let closestLocation = locations.min(by: { location.distance(from: $0) < location.distance(from: $1) }) {
-            print("closest location: \(closestLocation), distance: \(location.distance(from: closestLocation))")
-            return closestLocation
-        } else {
-            print("coordinates is empty")
-            return nil
+    
+    func enableNotifications() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) { granted, error in
+            if let error = error {
+                // Handle the error here.
+            }
+            if granted {
+                print("Granted")
+                DispatchQueue.main.async {
+#if os(iOS)
+                    UIApplication.shared.registerForRemoteNotifications()
+#elseif os(macOS)
+                    NSApplication.shared.registerForRemoteNotifications()
+#endif
+                }
+            }
         }
     }
     

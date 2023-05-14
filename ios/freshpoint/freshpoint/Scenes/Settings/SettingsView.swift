@@ -7,12 +7,12 @@
 
 import SwiftUI
 import MapKit
-import UserNotifications
+import SwiftUIKit
 
 struct SettingsView: View {
     @StateObject var viewModel = SettingsViewModel()
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50.04874970601164, longitude: 14.414124182262928), span: MKCoordinateSpan(latitudeDelta: 0.3, longitudeDelta: 0.3))
-    @State private var selected = 1
+    @Environment(\.scenePhase) var scenePhase
+    @State private var presentSheet = true
 #if os(iOS)
     @UIApplicationDelegateAdaptor var delegate: AppDelegate
 #elseif os(macOS)
@@ -21,57 +21,90 @@ struct SettingsView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            Map(coordinateRegion: $region, annotationItems: viewModel.fridges) {
-                MapAnnotation(coordinate: $0.corelocation.coordinate) {
-                    Image(systemName: "refrigerator.fill")
-                        .foregroundColor(.white)
-                        .frame(width: 15,height: 15)
-                        .padding(10)
-                        .background(Color.accentColor)
-                        .clipShape(Circle())
+            Map(coordinateRegion: $viewModel.mapRegion, showsUserLocation: true, annotationItems: viewModel.fridges) {
+                fridge in
+                MapAnnotation(coordinate: fridge.corelocation.coordinate) {
+                    Button(action: {
+                        viewModel.selectedFridge = fridge
+                        viewModel.mapRegion.center = fridge.corelocation.coordinate
+                    }) {
+                        Image(systemName: "refrigerator.fill")
+                            .foregroundColor(.white)
+                            .frame(width: 15,height: 15)
+                            .padding(10)
+                            .background(fridge.id == viewModel.selectedFridge?.id ? Color.orange : Color.accentColor)
+                            .clipShape(Circle())
+                    }
+
                     
                 }
+            }.sheet(isPresented: $presentSheet) {
+                makeSheet(from: viewModel)
             }
-            VStack(spacing: 10) {
-                Button("Zapni si notifikace") {
-                    let center = UNUserNotificationCenter.current()
-                    center.requestAuthorization(options: [.alert, .sound]) { granted, error in
-                        if let error = error {
-                            // Handle the error here.
-                        }
-                        if granted {
-                            print("Granted")
-                            DispatchQueue.main.async {
-#if os(iOS)
-                                UIApplication.shared.registerForRemoteNotifications()
-#elseif os(macOS)
-                                NSApplication.shared.registerForRemoteNotifications()
-#endif
-                            }
-                        }
-                    }
-                }
-                List {
-                    ForEach(viewModel.fridges) { fridge in
-                        VStack(alignment:.leading) {
-                            Text(fridge.location.name)
-                            Text(fridge.userDistance.converted(to: UnitLength.kilometers).value.description).font(.caption)
-                        }.listRowBackground(Color.clear)
-                    }
-                }
-                .listStyle(PlainListStyle())
-            }.frame(height: 200).padding(.vertical).background(.thinMaterial).cornerRadius(30)
         }
         .ignoresSafeArea()
         .task {
             await viewModel.fetch()
-            viewModel.locationManager.requestLocation()
-            viewModel.updateFridgesDistance()
-            region.center = viewModel.locationManager.location.coordinate
-            region.span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                Task { @MainActor in
+                    // Michaluv fix - Fixes bug when sheet becomes dimmed after resuming app
+                    presentSheet = false
+                    presentSheet = true
+                }
+            }
         }
     }
+    
+    func makeSheet(from viewModel: SettingsViewModel) -> some View {
+        VStack(spacing: 10) {
+            VStack {
+                makeFridgeOverview()
+            }
+            List {
+                ForEach(viewModel.fridges.prefix(5)) { fridge in
+                    HStack(alignment: .center) {
+                        Text(fridge.location.name)
+                        Text(fridge.userDistance.formatted()).font(.caption)
+                    }
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets())
+                }
+            }
+            .listStyle(PlainListStyle())
+        }
+        .padding(.vertical, 20)
+        .padding(.horizontal)
+        .presentationDetents(undimmed: [.height(200), .medium])
+        .presentationBackground(.thinMaterial)
+        .interactiveDismissDisabled() 
+        
+    }
+    
+    @ViewBuilder
+    func makeFridgeOverview() -> some View {
+        if let fridge = viewModel.selectedFridge ?? viewModel.closestFridge {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text((viewModel.selectedFridge?.id == viewModel.closestFridge?.id) ? "Nejbližší lednice" : "Vybraná lednice").font(.subheadline)
+                    Text(fridge.location.name).font(.headline)
+                }
+                Spacer()
+                Text(fridge.userDistance.formatted())
+            }
+            HStack {
+                FormActionButton(icon: Image(systemName: "takeoutbag.and.cup.and.straw.fill") , title: "Nastavit jako výchozí - Tohle nic nedela") {
+                }
+                FormActionButton(icon: Image(systemName: "bell.fill"), title: "Zapni si notifikace") {
+                    viewModel.enableNotifications()
+                }
+            }
+        }
+    }
+    
 }
+
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {

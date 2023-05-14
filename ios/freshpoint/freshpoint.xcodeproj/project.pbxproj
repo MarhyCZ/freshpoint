@@ -25,6 +25,8 @@
 		900E733C2A0D6A0E006BECED /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E733B2A0D6A0E006BECED /* SettingsViewModel.swift */; };
 		900E73402A0D7C16006BECED /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900E733F2A0D7C16006BECED /* LocationManager.swift */; };
 		905E72382A0EB65D00CB8552 /* FoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905E72372A0EB65D00CB8552 /* FoodDetailView.swift */; };
+		905E723B2A1008F300CB8552 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905E723A2A1008F300CB8552 /* UIApplication.swift */; };
+		905E723E2A100D3B00CB8552 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 905E723D2A100D3B00CB8552 /* SwiftUIKit */; };
 		909BF6EA29FA74DD00967238 /* FoodListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BF6E929FA74DD00967238 /* FoodListViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,7 @@
 		900E733D2A0D7943006BECED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		900E733F2A0D7C16006BECED /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		905E72372A0EB65D00CB8552 /* FoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailView.swift; sourceTree = "<group>"; };
+		905E723A2A1008F300CB8552 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		909BF6E929FA74DD00967238 /* FoodListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				905E723E2A100D3B00CB8552 /* SwiftUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				90030E2029F5579100598D7F /* Data.swift */,
+				905E723A2A1008F300CB8552 /* UIApplication.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -196,6 +201,9 @@
 			dependencies = (
 			);
 			name = freshpoint;
+			packageProductDependencies = (
+				905E723D2A100D3B00CB8552 /* SwiftUIKit */,
+			);
 			productName = freshpoint;
 			productReference = 90030DFC29F3E22700598D7F /* freshpoint.app */;
 			productType = "com.apple.product-type.application";
@@ -217,13 +225,17 @@
 			};
 			buildConfigurationList = 90030DF729F3E22700598D7F /* Build configuration list for PBXProject "FreshPoint" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = cs;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				cs,
 			);
 			mainGroup = 90030DF329F3E22700598D7F;
+			packageReferences = (
+				905E723C2A100D3B00CB8552 /* XCRemoteSwiftPackageReference "SwiftUIKit" */,
+			);
 			productRefGroup = 90030DFD29F3E22700598D7F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -250,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				905E723B2A1008F300CB8552 /* UIApplication.swift in Sources */,
 				90030E1A29F3EB7800598D7F /* Fetch.swift in Sources */,
 				90030E1729F3E3E800598D7F /* FoodListView.swift in Sources */,
 				909BF6EA29FA74DD00967238 /* FoodListViewModel.swift in Sources */,
@@ -394,7 +407,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = freshpoint/freshpoint.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"freshpoint/Preview Content\"";
 				DEVELOPMENT_TEAM = FBWNLT2RLU;
 				ENABLE_PREVIEWS = YES;
@@ -431,7 +444,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = freshpoint/freshpoint.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"freshpoint/Preview Content\"";
 				DEVELOPMENT_TEAM = FBWNLT2RLU;
 				ENABLE_PREVIEWS = YES;
@@ -483,6 +496,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		905E723C2A100D3B00CB8552 /* XCRemoteSwiftPackageReference "SwiftUIKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielsaidi/SwiftUIKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		905E723D2A100D3B00CB8552 /* SwiftUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 905E723C2A100D3B00CB8552 /* XCRemoteSwiftPackageReference "SwiftUIKit" */;
+			productName = SwiftUIKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 90030DF429F3E22700598D7F /* Project object */;
 }
