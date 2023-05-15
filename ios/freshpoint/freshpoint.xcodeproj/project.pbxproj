@@ -28,6 +28,7 @@
 		905E723B2A1008F300CB8552 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905E723A2A1008F300CB8552 /* UIApplication.swift */; };
 		905E723E2A100D3B00CB8552 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 905E723D2A100D3B00CB8552 /* SwiftUIKit */; };
 		909BF6EA29FA74DD00967238 /* FoodListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BF6E929FA74DD00967238 /* FoodListViewModel.swift */; };
+		90A44A812A12231500549087 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A44A802A12231500549087 /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		905E72372A0EB65D00CB8552 /* FoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetailView.swift; sourceTree = "<group>"; };
 		905E723A2A1008F300CB8552 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		909BF6E929FA74DD00967238 /* FoodListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListViewModel.swift; sourceTree = "<group>"; };
+		90A44A802A12231500549087 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +158,7 @@
 			children = (
 				90030E2029F5579100598D7F /* Data.swift */,
 				905E723A2A1008F300CB8552 /* UIApplication.swift */,
+				90A44A802A12231500549087 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				900E733C2A0D6A0E006BECED /* SettingsViewModel.swift in Sources */,
 				90030E0029F3E22700598D7F /* freshpointApp.swift in Sources */,
 				90030E1129F3E2C200598D7F /* FridgeCatalog.swift in Sources */,
+				90A44A812A12231500549087 /* Color.swift in Sources */,
 				90030E1C29F5541F00598D7F /* DeviceManager.swift in Sources */,
 				900E73382A0D65E3006BECED /* Constants.swift in Sources */,
 				90030E2129F5579100598D7F /* Data.swift in Sources */,

@@ -62,6 +62,7 @@ struct FoodListView: View {
                     
                 }
                 .onChange(of: currentCategory) { newCategory in
+                    print(newCategory)
                     withAnimation(.easeOut) {
                         reader.scrollTo(newCategory, anchor: .center)
                         
@@ -80,7 +81,7 @@ struct FoodListView: View {
                     GeometryReader { geometry in
                         EmptyView().onChange(of: geometry.frame(in: .global)) { globalFrame in
                             let offset = globalFrame.minY
-                            print("\(category.name): \(offset)")
+                            // print("\(category.name): \(offset)")
 #if os(iOS)
                             let window = UIApplication.firstKeyWindowForConnectedScenes
                             let height = window?.safeAreaInsets.top
@@ -91,6 +92,7 @@ struct FoodListView: View {
                             
                             if let height {
                                 if offset < height + 200 &&
+                                    offset > 0 &&
                                     currentCategory != category.name {
                                     currentCategory = category.name
                                 }
@@ -107,11 +109,15 @@ struct FoodListView: View {
                             NavigationLink(destination: FoodDetailView(foodItem: item)) {
                                 HStack() {
                                     VStack(alignment: .listRowSeparatorLeading) {
-                                        Text(item.name).multilineTextAlignment(.leading)
-                                        Text("\(item.price),- Kč")
-                                            .foregroundColor(item.discount ? .red : .gray)
-                                        Text("Kusů: \(item.quantity)")
-                                            .foregroundColor(.gray)
+                                        Text(item.name)
+                                            .font(Font.headline)
+                                            .multilineTextAlignment(.leading)
+                                        HStack(spacing: 10) {
+                                            Text("\(item.price),- Kč")
+                                                .foregroundColor(item.discount ? .red : .gray)
+                                            Text("Kusů: \(item.quantity)")
+                                                .foregroundColor(.gray)
+                                        }
                                     }
                                     Spacer()
                                     AsyncImage(url: item.imageURL) { image in
@@ -125,7 +131,7 @@ struct FoodListView: View {
                                 }
                                 .padding(.vertical, 10)
                                 .listRowSeparator(.hidden)
-                            }
+                            }.padding().background(Color.secondaryBackground).cornerRadius(10)
                         }
                         .tag(category.name)
                     }
