@@ -25,8 +25,8 @@ struct SettingsView: View {
                 fridge in
                 MapAnnotation(coordinate: fridge.corelocation.coordinate) {
                     Button(action: {
-                        viewModel.selectedFridge = fridge
-                        viewModel.mapRegion.center = fridge.corelocation.coordinate
+                        viewModel.selectFridge(fridge)
+                        presentSheet = true
                     }) {
                         Image(systemName: "refrigerator.fill")
                             .foregroundColor(.white)
@@ -51,25 +51,30 @@ struct SettingsView: View {
                 Task { @MainActor in
                     // Michaluv fix - Fixes bug when sheet becomes dimmed after resuming app
                     presentSheet = false
-                    presentSheet = true
                 }
             }
         }
     }
     
     func makeSheet(from viewModel: SettingsViewModel) -> some View {
-        VStack(spacing: 10) {
+        VStack(alignment: .leading, spacing: 10) {
             VStack {
                 makeFridgeOverview()
             }
+            Text("Nejbližší lednice od vás:")
             List {
                 ForEach(viewModel.fridges.prefix(5)) { fridge in
-                    HStack(alignment: .center) {
-                        Text(fridge.location.name)
-                        Text(fridge.userDistance.formatted()).font(.caption)
+                    Button {
+                        viewModel.selectFridge(fridge)
+                    } label: {
+                        HStack(alignment: .center) {
+                            Text(fridge.location.name)
+                            Spacer()
+                            Text(fridge.userDistance.formatted()).font(.caption)
+                        }
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets())
                     }
-                    .listRowBackground(Color.clear)
-                    .listRowInsets(EdgeInsets())
                 }
             }
             .listStyle(PlainListStyle())
@@ -78,7 +83,7 @@ struct SettingsView: View {
         .padding(.horizontal)
         .presentationDetents(undimmed: [.height(200), .medium])
         .presentationBackground(.thinMaterial)
-        .interactiveDismissDisabled() 
+        // .interactiveDismissDisabled()
         
     }
     

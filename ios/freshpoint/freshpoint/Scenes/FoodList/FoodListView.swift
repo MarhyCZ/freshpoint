@@ -108,7 +108,7 @@ struct FoodListView: View {
                         ForEach(category.products) { item in
                             NavigationLink(destination: FoodDetailView(foodItem: item)) {
                                 HStack() {
-                                    VStack(alignment: .listRowSeparatorLeading) {
+                                    VStack(alignment: .listRowSeparatorLeading, spacing: 10) {
                                         Text(item.name)
                                             .font(Font.headline)
                                             .multilineTextAlignment(.leading)

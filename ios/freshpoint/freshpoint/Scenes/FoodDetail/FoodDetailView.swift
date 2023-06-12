@@ -9,13 +9,20 @@ import SwiftUI
 
 struct FoodDetailView: View {
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.dismiss) var dismiss
+    
     @State var foodItem: FoodItem
     var body: some View {
         VStack {
-            AsyncImage(url: foodItem.imageURL)
+            AsyncImage(url: foodItem.imageURL).background(Color.white)
             Text(foodItem.name).font(.largeTitle)
             Text(foodItem.info)
             Text(foodItem.price.description)
+            Spacer()
+            Button(
+                "Zpět na přehled produktů",
+                action: { dismiss() }
+            )
         }
     }
     

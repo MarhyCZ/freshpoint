@@ -51,6 +51,11 @@ import MapKit
         selectedFridge = closestFridge
     }
     
+    func selectFridge(_ fridge: Fridge) {
+        selectedFridge = fridge
+        mapRegion.center = fridge.corelocation.coordinate
+    }
+    
     func enableNotifications() {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound]) { granted, error in
