@@ -12,6 +12,7 @@ import SwiftUIKit
 struct SettingsView: View {
     @StateObject var viewModel = SettingsViewModel()
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.dismiss) var dismiss
     @State private var presentSheet = true
 #if os(iOS)
     @UIApplicationDelegateAdaptor var delegate: AppDelegate
@@ -99,7 +100,9 @@ struct SettingsView: View {
                 Text(fridge.userDistance.formatted())
             }
             HStack {
-                FormActionButton(icon: Image(systemName: "takeoutbag.and.cup.and.straw.fill") , title: "Nastavit jako výchozí - Tohle nic nedela") {
+                FormActionButton(icon: Image(systemName: "takeoutbag.and.cup.and.straw.fill") , title: "Nastavit jako výchozí") {
+                    viewModel.saveFridge()
+                    dismiss()
                 }
                 FormActionButton(icon: Image(systemName: "bell.fill"), title: "Zapni si notifikace") {
                     viewModel.enableNotifications()

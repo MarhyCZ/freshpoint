@@ -10,6 +10,7 @@ import SwiftUI
 struct FoodListView: View {
     @StateObject var viewModel = FoodListViewModel()
     @Environment(\.scenePhase) var scenePhase
+    @StateObject var settings = Settings.shared
     @State private var currentCategory: String = "Nápoje"
     
     var body: some View {
@@ -33,13 +34,17 @@ struct FoodListView: View {
                     await viewModel.fetch()
                 }
             }
+        }.onChange(of: settings.selectedFridgeId) { _ in
+            Task { @MainActor in
+                await viewModel.fetch()
+            }
         }
     }
     
     func makeHeader(from categories: [CategoryItem]) -> some View {
         VStack {
             HStack() {
-                Text("O2 Czech Republic a.s.")
+                Text(viewModel.selectedFridge?.location.name ?? "Nenačteno")
                 Spacer()
                 NavigationLink {
                     SettingsView()
@@ -55,7 +60,8 @@ struct FoodListView: View {
                             Text(category.name)
                                 .fontWeight(category.name == currentCategory ? .bold : .regular)
                                 .foregroundColor(category.name == currentCategory ? .accentColor : .primary)
-                                .padding()
+                                .padding(.vertical, 0)
+                                .padding(.horizontal)
                                 .tag(category.name)
                         }
                     }

@@ -29,6 +29,7 @@
 		905E723E2A100D3B00CB8552 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 905E723D2A100D3B00CB8552 /* SwiftUIKit */; };
 		909BF6EA29FA74DD00967238 /* FoodListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909BF6E929FA74DD00967238 /* FoodListViewModel.swift */; };
 		90A44A812A12231500549087 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A44A802A12231500549087 /* Color.swift */; };
+		90FD18342A37629200F2C40F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FD18332A37629200F2C40F /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		905E723A2A1008F300CB8552 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		909BF6E929FA74DD00967238 /* FoodListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListViewModel.swift; sourceTree = "<group>"; };
 		90A44A802A12231500549087 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		90FD18332A37629200F2C40F /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				90030E1D29F5548800598D7F /* Device.swift */,
 				900E73122A06CC4C006BECED /* CategoryItem.swift */,
 				900E73392A0D68E2006BECED /* Fridge.swift */,
+				90FD18332A37629200F2C40F /* Settings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				90A44A812A12231500549087 /* Color.swift in Sources */,
 				90030E1C29F5541F00598D7F /* DeviceManager.swift in Sources */,
 				900E73382A0D65E3006BECED /* Constants.swift in Sources */,
+				90FD18342A37629200F2C40F /* Settings.swift in Sources */,
 				90030E2129F5579100598D7F /* Data.swift in Sources */,
 				900E731129FC6452006BECED /* NetworkError.swift in Sources */,
 				900E73362A0D6294006BECED /* SettingsView.swift in Sources */,
