@@ -68,7 +68,7 @@ func parseFoodProduct(category string, product *goquery.Selection) FoodItem {
 	name := product.Find(".col-12.mb-2 > .font-weight-bold").Text()
 
 	// Get the image
-	imageURL, _ := product.Find(".w-auto.img-fluid").Attr("src")
+	imageURL, _ := product.Find(".img-fluid").Attr("src")
 
 	// Get the info
 	info := product.Find(".product-info").Text()
@@ -91,12 +91,14 @@ func parseFoodProduct(category string, product *goquery.Selection) FoodItem {
 	quantityString := strings.Fields(product.Find(".col-6.pr-md-3 > .px-2.font-italic.font-weight-bold").Text())
 	if len(quantityString) > 0 {
 		quantity, err = strconv.Atoi(quantityString[0])
-		switch quantityString[0] {
-		case "Poslední":
-			quantity = 1
-		default:
-			log.Println("Error parsing quantity for: " + name)
-			quantity = -1
+		if err != nil {
+			switch quantityString[0] {
+			case "Poslední":
+				quantity = 1
+			default:
+				log.Println("Error parsing quantity for: " + name)
+				quantity = 0
+			}
 		}
 	}
 	return FoodItem{category, name, imageURL, info, price, quantity, discount}
