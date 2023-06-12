@@ -12,7 +12,9 @@ class FoodItemFetcher {
     func fetchCatalog() async throws -> FridgeCatalog {
 //        var freshpointCatalog = FreshPointCatalog(categories: [String](), products: [FoodItem]())
         print("fetching catalog data")
-        guard let url = URL(string: "food", relativeTo: Constants.baseURL) else {
+        let defaults = UserDefaults.standard
+        let selectedFridge = defaults.object(forKey: Constants.userDefaultsKeys.selectedFridge.rawValue) as? Int ?? 298
+        guard let url = URL(string: "api/fridges/" + String(selectedFridge), relativeTo: Constants.baseURL) else {
             throw NetworkError.badURL
         }
         
@@ -28,7 +30,7 @@ class FoodItemFetcher {
     
     func fetchFridges() async throws -> [Fridge] {
         print("fetching Fridges list")
-        guard let url = URL(string: "/api/freshpoint/298", relativeTo: Constants.baseURL) else {
+        guard let url = URL(string: "api/fridges/", relativeTo: Constants.baseURL) else {
             throw NetworkError.badURL
         }
         

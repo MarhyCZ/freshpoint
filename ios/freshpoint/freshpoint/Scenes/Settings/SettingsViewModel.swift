@@ -54,6 +54,8 @@ import MapKit
     func selectFridge(_ fridge: Fridge) {
         selectedFridge = fridge
         mapRegion.center = fridge.corelocation.coordinate
+        let defaults = UserDefaults.standard
+        defaults.set(fridge.id, forKey: Constants.userDefaultsKeys.selectedFridge.rawValue)
     }
     
     func enableNotifications() {

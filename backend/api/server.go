@@ -16,9 +16,9 @@ var env *environment.Env
 func Serve(e *environment.Env) {
 	env = e
 	r := chi.NewRouter()
-	r.Get("/food/{fridgeId}", getFridge)
+	r.Get("/api/fridges/{fridgeId}", getFridge)
 	r.Post("/api/devices", handleDevice)
-	r.Get("/api/freshpoint", getFridgeList)
+	r.Get("/api/fridges", getFridgeList)
 
 	srv := &http.Server{
 		Addr:    ":8080",
