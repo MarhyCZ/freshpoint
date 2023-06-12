@@ -51,8 +51,10 @@ func FetchProducts(fridge Fridge) FridgeCatalog {
 			// For each item found, get the food products
 			div.Find(".col-12.col-sm-6.col-lg-4.mb-5.mb-sm-3").Each(func(i int, productEl *goquery.Selection) {
 				product := parseFoodProduct(category.Name, productEl)
-				products = append(products, product)
-				categories[index].Products = append(categories[index].Products, product)
+				if product.Quantity > 0 {
+					products = append(products, product)
+					categories[index].Products = append(categories[index].Products, product)
+				}
 			})
 		})
 	}
