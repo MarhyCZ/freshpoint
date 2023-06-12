@@ -13,12 +13,12 @@ type Env struct {
 }
 
 type Store struct {
-	Catalog freshpoint.FridgeCatalog
+	Catalog map[int]freshpoint.FridgeCatalog
 	Fridges []freshpoint.Fridge
 }
 
 func NewStore() *Store {
-	catalog := freshpoint.FetchProducts()
+	catalog := make(map[int]freshpoint.FridgeCatalog)
 	fridges := freshpoint.FetchFridges()
 
 	return &Store{

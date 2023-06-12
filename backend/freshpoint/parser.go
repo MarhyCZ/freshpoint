@@ -13,8 +13,13 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func FetchProducts() FridgeCatalog {
-	res, err := http.Get("https://my.freshpoint.cz/device/product-list/298")
+const (
+	// https://my.freshpoint.cz/device/product-list/298
+	fridgeURL = "https://my.freshpoint.cz/device/product-list/"
+)
+
+func FetchProducts(fridge Fridge) FridgeCatalog {
+	res, err := http.Get(fridgeURL + strconv.Itoa(fridge.Prop.Id))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -82,10 +87,10 @@ func parseFoodProduct(category string, product *goquery.Selection) FoodItem {
 	}
 
 	// Get the quantity
+	quantity := 0
 	quantityString := strings.Fields(product.Find(".col-6.pr-md-3 > .px-2.font-italic.font-weight-bold").Text())
-	quantity, err := strconv.Atoi(quantityString[0])
-
-	if err != nil {
+	if len(quantityString) > 0 {
+		quantity, err = strconv.Atoi(quantityString[0])
 		switch quantityString[0] {
 		case "Poslední":
 			quantity = 1

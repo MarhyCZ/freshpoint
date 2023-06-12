@@ -4,8 +4,10 @@ import (
 	"encoding/json"
 	"freshpoint/backend/database"
 	"freshpoint/backend/environment"
+	"github.com/go-chi/chi/v5"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -13,14 +15,14 @@ var env *environment.Env
 
 func Serve(e *environment.Env) {
 	env = e
-	mux := http.NewServeMux()
-	mux.Handle("/food", allowedMethodsMiddleware(http.HandlerFunc(index)))
-	mux.HandleFunc("/api/devices", handleDevice)
-	mux.HandleFunc("/api/freshpoint", handleFreshpoint)
+	r := chi.NewRouter()
+	r.Get("/food/{fridgeId}", getFridge)
+	r.Post("/api/devices", handleDevice)
+	r.Get("/api/freshpoint", getFridgeList)
 
 	srv := &http.Server{
 		Addr:    ":8080",
-		Handler: mux,
+		Handler: r,
 	}
 
 	err := srv.ListenAndServe()
@@ -29,17 +31,18 @@ func Serve(e *environment.Env) {
 	}
 }
 
-func index(w http.ResponseWriter, r *http.Request) {
+func getFridge(w http.ResponseWriter, r *http.Request) {
 	// if r.URL.Path != "/" {
 	// 	http.NotFound(w, r)
 	// 	return
 	// }
 	// Retrieve the data from cache
-	catalog := env.Store.Catalog
+	fridgeId, _ := strconv.Atoi(chi.URLParam(r, "fridgeId"))
+	catalog := env.Store.Catalog[fridgeId]
 	json.NewEncoder(w).Encode(catalog)
 }
 
-func handleFreshpoint(w http.ResponseWriter, r *http.Request) {
+func getFridgeList(w http.ResponseWriter, r *http.Request) {
 	fridges := env.Store.Fridges
 	json.NewEncoder(w).Encode(fridges)
 }
