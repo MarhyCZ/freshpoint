@@ -39,10 +39,14 @@ func FetchProducts(fridge Fridge) FridgeCatalog {
 
 	doc.Find("a.nav-link").Each(func(i int, link *goquery.Selection) {
 		catName := link.Text()
-		categories = append(categories, CategoryItem{
-			Name:     catName,
-			Products: make([]FoodItem, 0),
-		})
+		// Denylist
+		if !strings.Contains(catName, "Srdcovky") {
+			categories = append(categories, CategoryItem{
+				Name:     catName,
+				Products: make([]FoodItem, 0),
+			})
+		}
+
 	})
 
 	for index, category := range categories {
