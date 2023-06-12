@@ -28,7 +28,7 @@ class FoodItemFetcher {
     
     func fetchFridges() async throws -> [Fridge] {
         print("fetching Fridges list")
-        guard let url = URL(string: "/api/freshpoint", relativeTo: Constants.baseURL) else {
+        guard let url = URL(string: "/api/freshpoint/298", relativeTo: Constants.baseURL) else {
             throw NetworkError.badURL
         }
         
